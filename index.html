@@ -287,22 +287,36 @@
     });
   </script>
 
-  <!-- Musik & Popup -->
+  <!-- Musik & Popup dengan Stop on Exit -->
   <script>
-    const popup = document.getElementById("popup-welcome");
-    const audio = document.getElementById("bg-music");
+  const popup = document.getElementById("popup-welcome");
+  const audio = document.getElementById("bg-music");
 
-    function closePopup() {
-      popup.classList.add("fade-out");
-      setTimeout(() => {
-        popup.style.display = "none";
-      }, 400);
+  function closePopup() {
+    popup.classList.add("fade-out");
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 400);
+  }
+
+  // Main musik saat klik pertama
+  document.body.addEventListener("click", () => {
+    audio.play().catch(() => {});
+    closePopup();
+  }, { once: true });
+
+  // Stop musik saat meninggalkan halaman
+  window.addEventListener("beforeunload", () => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      audio.pause();
+      audio.currentTime = 0;
     }
-
-    document.body.addEventListener("click", () => {
-      audio.play().catch(() => {});
-      closePopup();
-    }, { once: true });
+  });
   </script>
 </body>
 </html>

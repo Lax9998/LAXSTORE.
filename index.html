@@ -296,7 +296,7 @@
   <div id="popup-success" class="popup-box-container" style="display:none;">
     <div class="popup-box">
       <h2>Terima Kasih!</h2>
-      <p>Ucapan Terimakasih Telah Membuat Laporan Bug,<br>Admin Sesegera Mungkin Memperbaikinya</p>
+      <p>Karena Telah Membuat Laporan Bug/Eror<br>Admin Sesegera Mungkin Memperbaikinya</p>
       <button onclick="closeSuccessPopup()">Tutup</button>
     </div>
   </div>
@@ -508,8 +508,13 @@
       document.getElementById("reportText").value = "";
       document.getElementById("popup-success").style.display = "flex";
       setTimeout(() => {
-      document.getElementById("popup-success").style.display = "none";
-    }, 3000); // 3 detik
+        const popup = document.getElementById("popup-success");
+        popup.classList.add("fade-out");
+        setTimeout(() => {
+          popup.style.display = "none";
+          popup.classList.remove("fade-out");
+        }, 400);
+       }, 5000);
       closePanels();
     } 
     

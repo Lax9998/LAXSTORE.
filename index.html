@@ -384,6 +384,16 @@
       document.getElementById("musicMenu").classList.add("hidden");
     }
 
+    // Musik berhenti saat keluar/tab ditutup
+    window.addEventListener("beforeunload", function () {
+      const audio = document.getElementById("bg-music");
+        if (!audio.paused) {
+         audio.pause();
+         audio.currentTime = 0;
+       }
+     });
+
+
     function submitReport() {
       const text = document.getElementById("reportText").value.trim();
       if (text) {

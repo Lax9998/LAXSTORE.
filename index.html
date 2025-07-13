@@ -230,6 +230,10 @@
     .floating-panel ul li:hover {
       background: #9333ea;
     }
+    .floating-panel ul li img {
+      vertical-align: middle;
+      margin-right: 6px;
+    }
   </style>
 </head>
 <body>
@@ -399,7 +403,7 @@
 
       songs.forEach((song, idx) => {
         const li = document.createElement("li");
-        li.textContent = titles[idx];
+        li.innerHTML = `<img src="https://img.icons8.com/color/48/musical-notes.png" width="20" style="vertical-align:middle; margin-right:8px;"> ${titles[idx]}`;
         li.onclick = () => {
           audio.src = song;
           audio.play();
@@ -413,14 +417,19 @@
        const laporanHTML = laporan.length === 0 
          ? "<b>📭 Belum ada laporan masuk.</b>"
          : laporan.map((l, i) => `
-           <div>
-             <b>${l.waktu}</b>: ${l.isi}<br>
-             Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}
-             ${l.status === "belum" 
-               ? `<br><button onclick="selesaikanLaporan(${i})">Tandai Selesai</button>` 
-               : ""}
-             <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
-           </div><hr>
+           <div style="display:flex; align-items:center; gap:10px;">
+             <img src="https://img.icons8.com/color/48/bug.png" width="28">
+            <div>
+              <b>${l.waktu}</b><br>
+              ${l.isi}<br>
+              Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}
+              ${l.status === "belum"
+                ? `<br><button onclick="selesaikanLaporan(${i})">Tandai Selesai</button>`
+                : ""}
+              <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
+            </div>
+         </div>
+         <hr>
          `).join("");
 
        document.getElementById("adminReports").innerHTML = laporanHTML;

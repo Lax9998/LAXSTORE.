@@ -295,6 +295,13 @@
     <ul id="musicList"></ul>
   </div>
 
+  <!-- Panel Admin - Laporan -->
+  <div id="adminPanel" class="popup-box" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#1f1f1f; padding:20px; border-radius:12px; z-index:99999; max-height:80%; overflow-y:auto; width:90%; max-width:400px; box-shadow:0 0 25px #a855f7;">
+    <h3 style="color:white;">📋 Laporan Masuk</h3>
+    <div id="adminReports" style="text-align:left; font-size:14px; color:#ccc;"></div>
+    <button onclick="closeAdminPanel()" style="margin-top:10px; background:#9333ea; color:white; border:none; padding:8px 15px; border-radius:8px;">Tutup</button>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
@@ -364,31 +371,16 @@
         };
         musicList.appendChild(li);
       });
+      
       if (location.href.includes("?admin")) {
        const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
 
-       const container = document.createElement("div");
-       container.style.position = "fixed";
-       container.style.bottom = "0";
-       container.style.left = "0";
-       container.style.right = "0";
-       container.style.maxHeight = "50%";
-       container.style.overflowY = "auto";
-       container.style.background = "#111";
-       container.style.borderTop = "2px solid #9333ea";
-       container.style.color = "#fff";
-       container.style.padding = "10px";
-       container.style.fontSize = "13px";
-       container.style.zIndex = "99999";
+       const laporanHTML = laporan.length === 0 
+         ? "<b>📭 Belum ada laporan masuk.</b>"
+         : laporan.map(l => `<div><b>${l.waktu}</b>: ${l.isi}</div>`).join("<hr>");
 
-       if (laporan.length === 0) {
-       container.innerHTML = "<b>📭 Belum ada laporan masuk.</b>";
-       } else {
-       container.innerHTML = "<b>📋 Laporan Masuk:</b><br>" +
-       laporan.map(l => `<div><b>${l.waktu}</b>: ${l.isi}</div>`).join("<hr>");
-       }
-
-       document.body.appendChild(container);
+       document.getElementById("adminReports").innerHTML = laporanHTML;
+       document.getElementById("adminPanel").style.display = "block";
      }
     });
 

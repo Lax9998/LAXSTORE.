@@ -136,6 +136,15 @@
       text-align: center;
       animation: float 2s ease-in-out infinite;
     }
+    .popup-box-container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
@@ -279,6 +288,15 @@
       <p>Menyediakan Layanan JB akun All Game Dan Menyediakan Jasa MC/Rekber Dan juga Kalian Bisa Join Grup JB & Saluran Stock</p>
       <p>Enjoi Gan 🔥</p>
       <button onclick="closePopup()">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Popup Sukses Laporan -->
+  <div id="popup-success" class="popup-box-container" style="display:none;">
+    <div class="popup-box">
+      <h2>Terima Kasih!</h2>
+      <p>Telah membuat laporan bug.<br>Admin sesegera mungkin memperbaikinya.</p>
+      <button onclick="closeSuccessPopup()">Tutup</button>
     </div>
   </div>
 
@@ -471,7 +489,7 @@
       // Cek jeda waktu antar kiriman (15 detik)
       const lastTime = localStorage.getItem("last_report_time");
       const now = Date.now();
-      if (lastTime && now - parseInt(lastTime) < 15000) {
+      if (lastTime && now - parseInt(lastTime) < 60000) {
         alert("Tunggu sebentar sebelum mengirim laporan lagi.");
         return;
       }
@@ -487,7 +505,7 @@
       });
       localStorage.setItem("lax_reports", JSON.stringify(laporan));
       document.getElementById("reportText").value = "";
-      alert("Laporan berhasil dikirim!");
+      document.getElementById("popup-success").style.display = "flex";
       closePanels();
     } 
     
@@ -497,6 +515,14 @@
       setTimeout(() => {
         panel.style.display = "none";
         panel.classList.remove("fade-out");
+     }, 400);
+    }
+    function closeSuccessPopup() {
+      const popup = document.getElementById("popup-success");
+      popup.classList.add("fade-out");
+      setTimeout(() => {
+        popup.style.display = "none";
+        popup.classList.remove("fade-out");
      }, 400);
     }
     function selesaikanLaporan(index) {

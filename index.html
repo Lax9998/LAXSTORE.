@@ -144,6 +144,7 @@
       justify-content: center;
       align-items: center;
       z-index: 999;
+      animation: float 2s ease-in-out infinite;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
@@ -295,11 +296,11 @@
   <div id="popup-success" class="popup-box-container" style="display:none;">
     <div class="popup-box">
       <h2>Terima Kasih!</h2>
-      <p>Telah membuat laporan bug.<br>Admin sesegera mungkin memperbaikinya.</p>
+      <p>Ucapan Terimakasih Telah Membuat Laporan Bug,<br>Admin Sesegera Mungkin Memperbaikinya</p>
       <button onclick="closeSuccessPopup()">Tutup</button>
     </div>
   </div>
-
+  
   <!-- Panel Bug -->
   <div id="reportForm" class="floating-panel hidden">
     <h3>Laporkan Bug</h3>
@@ -506,6 +507,9 @@
       localStorage.setItem("lax_reports", JSON.stringify(laporan));
       document.getElementById("reportText").value = "";
       document.getElementById("popup-success").style.display = "flex";
+      setTimeout(() => {
+      document.getElementById("popup-success").style.display = "none";
+    }, 3000); // 3 detik
       closePanels();
     } 
     

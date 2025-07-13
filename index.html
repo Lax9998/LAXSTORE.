@@ -384,15 +384,24 @@
       document.getElementById("musicMenu").classList.add("hidden");
     }
 
-    // Musik berhenti saat keluar/tab ditutup
-    window.addEventListener("beforeunload", function () {
-      const audio = document.getElementById("bg-music");
-        if (!audio.paused) {
-         audio.pause();
-         audio.currentTime = 0;
-       }
-     });
+    // Saat tab ditinggalkan
+document.addEventListener("visibilitychange", function () {
+  const audio = document.getElementById("bg-music");
+  if (document.hidden) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+});
 
+    // Saat halaman ditutup / reload
+ window.addEventListener("beforeunload", function () {
+   const audio = document.getElementById("bg-music");
+   if (!audio.paused) {
+     audio.pause();
+     audio.currentTime = 0;
+   }
+   return null;
+ });
 
     function submitReport() {
       const text = document.getElementById("reportText").value.trim();

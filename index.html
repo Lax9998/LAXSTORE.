@@ -419,40 +419,38 @@
       });
       
       if (location.href.includes("?admin")) {
-       const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
+  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
 
-       const laporanHTML = laporan.length === 0 
-         ? "<b>📭 Belum ada laporan masuk.</b>"
-         : laporan.map((l, i) => `
-           <div style="display:flex; align-items:center; gap:10px;">
-             <div style="font-size:26px;"></div>
-              <b>${l.waktu}</b><br>
-              ${l.isi}<br>
-              Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}
-              ${l.status === "belum"
-                ? `<br><button onclick="selesaikanLaporan(${i})">✅ Selesai</button>`
-                : ""}
-              <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
-            </div>
-         </div>
-         <hr>
-         `).join("");
+  const laporanHTML = laporan.length === 0 
+    ? "<b>📭 Belum ada laporan masuk.</b>"
+    : laporan.map((l, i) => `
+      <div style="display:flex; flex-direction:column; gap:5px; margin-bottom:10px;">
+        <b>${l.waktu}</b>
+        <div>${l.isi}</div>
+        <div>Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}</div>
+        ${l.status === "belum"
+          ? `<button onclick="selesaikanLaporan(${i})">✅ Tandai Selesai</button>`
+          : ""}
+        <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
+      </div>
+      <hr>
+    `).join("");
 
-       document.getElementById("adminReports").innerHTML = laporanHTML;
-       document.getElementById("adminPanel").style.display = "block";
-     }
+  document.getElementById("adminReports").innerHTML = laporanHTML;
+  document.getElementById("adminPanel").style.display = "block";
+      }
       
       if (!location.href.includes("?admin")) {
-        const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-        const notif = laporan.find(l => l.status === "selesai" && l.notify);
+  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
+  const notif = laporan.find(l => l.status === "selesai" && l.notify);
 
-        if (notif) {
-          alert("✅ Laporan Anda telah diperbaiki. Terima kasih!");
-          laporan.forEach(l => {
-            if (l.status === "selesai") l.notify = false;
-          });
-          localStorage.setItem("lax_reports", JSON.stringify(laporan));
-        }
+  if (notif) {
+    alert("✅ Laporan Anda telah diperbaiki. Terima kasih!");
+    laporan.forEach(l => {
+      if (l.status === "selesai") l.notify = false;
+    });
+    localStorage.setItem("lax_reports", JSON.stringify(laporan));
+  }
       }
     });
 
@@ -494,51 +492,51 @@
      });
     
     function submitReport() {
-      const name = document.getElementById("reportName").value.trim();
-      const bugOptions = document.getElementsByName("bug");
-      let selected = null;
+  const name = document.getElementById("reportName").value.trim();
+  const bugOptions = document.getElementsByName("bug");
+  let selected = null;
 
-      for (let opt of bugOptions) {
-        if (opt.checked) {
-          selected = opt.value;
-          break;
-        }
-      }
-      
-      if (!selected) {
-        alert("Silakan pilih jenis bug yang ingin dilaporkan.");
-        return;
-      }
-      
-      const lastTime = localStorage.getItem("last_report_time");
-      const now = Date.now();
-      if (lastTime && now - parseInt(lastTime) < 60000) {
-        alert("Tunggu sebentar sebelum mengirim laporan lagi.");
-        return;
-      }
-      localStorage.setItem("last_report_time", now);
+  for (let opt of bugOptions) {
+    if (opt.checked) {
+      selected = opt.value;
+      break;
+    }
+  }
 
-      const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-      laporan.push({
-        waktu: new Date().toLocaleString(),
-        isi: selected + (name ? ` (Dari: ${name})` : ""),
-        status: "belum",
-        notify: true
-      });
-      localStorage.setItem("lax_reports", JSON.stringify(laporan));
+  if (!selected) {
+    alert("Silakan pilih jenis bug yang ingin dilaporkan.");
+    return;
+  }
 
-      document.getElementById("reportName").value = "";
-      bugOptions.forEach(opt => opt.checked = false);
-      document.getElementById("popup-success").style.display = "flex";
-      setTimeout(() => {
-        const popup = document.getElementById("popup-success");
-        popup.classList.add("fade-out");
-        setTimeout(() => {
-          popup.style.display = "none";
-          popup.classList.remove("fade-out");
-        }, 400);
-      }, 5000);
-      closePanels();
+  const lastTime = localStorage.getItem("last_report_time");
+  const now = Date.now();
+  if (lastTime && now - parseInt(lastTime) < 60000) {
+    alert("Tunggu sebentar sebelum mengirim laporan lagi.");
+    return;
+  }
+  localStorage.setItem("last_report_time", now);
+
+  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
+  laporan.push({
+    waktu: new Date().toLocaleString(),
+    isi: selected + (name ? ` (Dari: ${name})` : ""),
+    status: "belum",
+    notify: true
+  });
+  localStorage.setItem("lax_reports", JSON.stringify(laporan));
+
+  document.getElementById("reportName").value = "";
+  bugOptions.forEach(opt => opt.checked = false);
+  document.getElementById("popup-success").style.display = "flex";
+  setTimeout(() => {
+    const popup = document.getElementById("popup-success");
+    popup.classList.add("fade-out");
+    setTimeout(() => {
+      popup.style.display = "none";
+      popup.classList.remove("fade-out");
+    }, 400);
+  }, 5000);
+  closePanels();
     }
     
     function closeAdminPanel() {
@@ -558,24 +556,24 @@
      }, 400);
     }
     function selesaikanLaporan(index) {
-      const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-      if (laporan[index]) {
-        laporan[index].status = "selesai";
-        laporan[index].notify = true;
-        localStorage.setItem("lax_reports", JSON.stringify(laporan));
-        location.reload(); // reload agar tampilannya update
-      }
+  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
+  if (laporan[index]) {
+    laporan[index].status = "selesai";
+    laporan[index].notify = true;
+    localStorage.setItem("lax_reports", JSON.stringify(laporan));
+    location.reload(); // reload agar tampilan admin update
+  }
     }
     
     function hapusLaporan(index) {
-      const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-      if (laporan[index]) {
-        if (confirm("Yakin ingin menghapus laporan ini?")) {
-          laporan.splice(index, 1);
-          localStorage.setItem("lax_reports", JSON.stringify(laporan));
-          location.reload();
-        }
-      }
+  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
+  if (laporan[index]) {
+    if (confirm("Yakin ingin menghapus laporan ini?")) {
+      laporan.splice(index, 1);
+      localStorage.setItem("lax_reports", JSON.stringify(laporan));
+      location.reload();
+    }
+  }
     }
   </script>
 </body>

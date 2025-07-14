@@ -310,11 +310,11 @@
     <h3>Laporkan Bug</h3>
     <input type="text" id="reportName" placeholder="Nama Anda (opsional)" style="width:100%; padding:8px; border-radius:8px; margin-bottom:10px;">
     <div id="bugOptions" style="text-align:left; margin-bottom:10px;">
-      <label><input type="radio" name="bug" value="Tampilan tidak sesuai"> Tampilan tidak sesuai</label><br>
-      <label><input type="radio" name="bug" value="Menu tidak bisa ditekan"> Menu tidak bisa ditekan</label><br>
-      <label><input type="radio" name="bug" value="Link rusak"> Link rusak</label><br>
-      <label><input type="radio" name="bug" value="Lagu tidak bunyi"> Lagu tidak bunyi</label><br>
-      <label><input type="radio" name="bug" value="Laporan lainnya"> Laporan lainnya</label><br>
+      <label><input type="radio" name="bug" value="Tampilan tidak sesuai"> WebSite Lemot</label><br>
+      <label><input type="radio" name="bug" value="Menu tidak bisa ditekan"> Menu Eror Min</label><br>
+      <label><input type="radio" name="bug" value="Link rusak"> Link Eror Min</label><br>
+      <label><input type="radio" name="bug" value="Lagu tidak bunyi"> Musik Bug Min</label><br>
+      <label><input type="radio" name="bug" value="Laporan lainnya"> MinLaxs Terlalu OP</label><br>
     </div>
     <button onclick="submitReport()">Laporkan</button>
   </div>
@@ -428,7 +428,7 @@
          ? "<b>📭 Belum ada laporan masuk.</b>"
          : laporan.map((l, i) => `
            <div style="display:flex; align-items:center; gap:10px;">
-             <div style="font-size:26px;">📩</div>
+             <div style="font-size:26px;"></div>
               <b>${l.waktu}</b><br>
               ${l.isi}<br>
               Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}

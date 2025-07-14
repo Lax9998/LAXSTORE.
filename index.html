@@ -411,7 +411,7 @@
       songs.forEach((song, idx) => {
         const li = document.createElement("li");
         li.innerHTML = `
-          <div style="font-size:26px; margin-bottom:5px;">🎵</div>
+          <div style="font-size:26px; margin-bottom:5px;"></div>
           <div style="color:white; font-size:14px;">${titles[idx]}</div>
         `;
         li.onclick = () => {
@@ -433,7 +433,7 @@
               ${l.isi}<br>
               Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}
               ${l.status === "belum"
-                ? `<br><button onclick="selesaikanLaporan(${i})">Tandai Selesai</button>`
+                ? `<br><button onclick="selesaikanLaporan(${i})">✅ Selesai</button>`
                 : ""}
               <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
             </div>

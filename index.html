@@ -410,9 +410,7 @@
 
       songs.forEach((song, idx) => {
         const li = document.createElement("li");
-        li.innerHTML = `
-          <div style="color:white; font-size:14px;">${titles[idx]}</div>
-        `;
+        li.textContent = titles[idx];
         li.onclick = () => {
           audio.src = song;
           audio.play();

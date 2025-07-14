@@ -311,8 +311,8 @@
     <input type="text" id="reportName" placeholder="Nama (opsional)" style="width:100%; padding:8px; border-radius:8px; margin-bottom:10px;">
     <div id="bugOptions" style="text-align:left; margin-bottom:10px;">
       <label><input type="radio" name="bug" value="Web Delay"> WebSite Lemot Anjai</label><br>
-      <label><input type="radio" name="bug" value="Menu Rusak"> Menu Eror MinLaxs</label><br>
-      <label><input type="radio" name="bug" value="Link Rusak"> Link Eror MinLaxs</label><br>
+      <label><input type="radio" name="bug" value="Menu Eror"> Menu Eror MinLaxs</label><br>
+      <label><input type="radio" name="bug" value="Link Eror"> Link Eror MinLaxs</label><br>
       <label><input type="radio" name="bug" value="Lagu Bug"> Musik Bug MinLaxs</label><br>
       <label><input type="radio" name="bug" value="MinLaxs No Counter"> MinLaxs Terlalu OP</label><br>
     </div>
@@ -370,15 +370,6 @@
       retina_detect: true
     });
 
-    function escapeHTML(text) {
-      return text.replace(/[&<>"']/g, function (char) {
-        return {
-          '&': '&amp;', '<': '&lt;', '>': '&gt;',
-          '"': '&quot;', "'": '&#039;'
-        }[char];
-      });
-    }
-    
     const logo = document.getElementById('logoSwitch');
     const logos = ["logo1.png", "logo2.png"];
     let i = 0;
@@ -430,50 +421,22 @@
       if (location.href.includes("?admin")) {
        const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
 
-       const laporanHTML = laporan.length === 0
-         ? "<b>📭 Belum ada laporan masuk.</b>"
-         : `
-           <table style="width:100%; border-collapse: collapse; font-size:13px; color:#ccc;">
-             <thead>
-               <tr style="background:#9333ea; color:white;">
-                <th style="padding:6px; border:1px solid #444; width:20%;">Tgl/Waktu</th>
-                <th style="padding:6px; border:1px solid #444; width:10%;">Nama</th>
-                <th style="padding:6px; border:1px solid #444; width:60%;">Isi Laporan</th>
-                <th style="padding:6px; border:1px solid #444; width:10%;">✔</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${laporan.map((l, i) => {
-                const waktu = new Date(l.waktu);
-                const tgl = waktu.toLocaleDateString('id-ID', { day: '2-digit', month: 'long' });
-                const jam = waktu.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-
-                const isiRaw = l.isi;
-                let nama = "Anonim";
-                let isiLaporan = isiRaw;
-
-                if (isiRaw.includes("(Dari:")) {
-                  const parts = isiRaw.split("(Dari:");
-                  isiLaporan = parts[0].trim();
-                  nama = parts[1].replace(")", "").trim();
-                }
-
-                return `
-                  <tr>
-                    <td style="padding:6px; border:1px solid #333; white-space:nowrap;">${tgl} / ${jam}</td>
-                    <td style="padding:6px; border:1px solid #333; white-space:nowrap;">${nama}</td>
-                    <td style="padding:6px; border:1px solid #333; word-break:break-word; white-space:pre-wrap; text-align:left;">${escapeHTML(isiLaporan)}</td>
-                    <td style="padding:6px; border:1px solid #333; text-align:center;">
-                      ${l.status === "selesai" ? "✅" : "⏳"}
-                      <br>
-                      ${l.status === "belum" ? `<button onclick="selesaikanLaporan(${i})" title="Tandai selesai">✔</button>` : ""}
-                      <button onclick="hapusLaporan(${i})" title="Hapus">🗑️</button>
-                    </td>
-                  </tr>
-                `;
-              }).join("")}
-            </tbody>
-          </table>
+       const laporanHTML = laporan.length === 0 
+         ? "<b>📭 Belum ada laporan masuk.</b>"
+         : laporan.map((l, i) => `
+           <div style="display:flex; align-items:center; gap:10px;">
+             <div style="font-size:26px;"></div>
+              <b>${l.waktu}</b><br>
+              ${l.isi}<br>
+              Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}
+              ${l.status === "belum"
+                ? `<br><button onclick="selesaikanLaporan(${i})">✅ Selesai</button>`
+                : ""}
+              <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
+            </div>
+         </div>
+         <hr>
+         `).join("");
 
        document.getElementById("adminReports").innerHTML = laporanHTML;
        document.getElementById("adminPanel").style.display = "block";
@@ -585,7 +548,14 @@
         panel.style.display = "none";
         panel.classList.remove("fade-out");
      }, 400);
-     
+    }
+    function closeSuccessPopup() {
+      const popup = document.getElementById("popup-success");
+      popup.classList.add("fade-out");
+      setTimeout(() => {
+        popup.style.display = "none";
+        popup.classList.remove("fade-out");
+     }, 400);
     }
     function selesaikanLaporan(index) {
       const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");

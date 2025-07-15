@@ -60,6 +60,13 @@
       margin-bottom: 30px;
       z-index: 2;
     }
+    #bugSelect {
+      background: #2a2a2a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+    }
     .menu-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -309,14 +316,17 @@
   <div id="reportForm" class="floating-panel hidden">
     <h3>Laporkan Bug</h3>
     <input type="text" id="reportName" placeholder="Nama (opsional)" style="width:100%; padding:8px; border-radius:8px; margin-bottom:10px;">
-    <div id="bugOptions" style="text-align:left; margin-bottom:10px;">
-      <label><input type="radio" name="bug" value="Web Delay"> WebSite Lemot Anjai</label><br>
-      <label><input type="radio" name="bug" value="Menu Eror"> Menu Eror MinLaxs</label><br>
-      <label><input type="radio" name="bug" value="Link Eror"> Link Eror MinLaxs</label><br>
-      <label><input type="radio" name="bug" value="Lagu Bug"> Musik Bug MinLaxs</label><br>
-      <label><input type="radio" name="bug" value="MinLaxs No Counter"> MinLaxs Terlalu OP</label><br>
-    </div>
-    <button onclick="submitReport()">Laporkan</button>
+    <div id="bugOptions" style="margin-bottom: 10px;">
+  <select id="bugSelect" style="width: 100%; padding: 10px; border-radius: 8px; background: #2a2a2a; color: white; border: none;">
+    <option value="">-- Pilih Jenis Bug --</option>
+    <option value="Web Delay">WebSite Lemot Anjai</option>
+    <option value="Menu Eror">Menu Eror MinLaxs</option>
+    <option value="Link Eror">Link Eror MinLaxs</option>
+    <option value="Lagu Bug">Musik Bug MinLaxs</option>
+    <option value="MinLaxs No Counter">MinLaxs Terlalu OP</option>
+  </select>
+    </div>
+    <button onclick="submitReport()">Laporkan</button>
   </div>
 
   <!-- Panel Musik -->
@@ -493,15 +503,8 @@
     
     function submitReport() {
   const name = document.getElementById("reportName").value.trim();
-  const bugOptions = document.getElementsByName("bug");
-  let selected = null;
-
-  for (let opt of bugOptions) {
-    if (opt.checked) {
-      selected = opt.value;
-      break;
-    }
-  }
+  const bugSelect = document.getElementById("bugSelect");
+const selected = bugSelect.value;
 
   if (!selected) {
     alert("Silakan pilih jenis bug yang ingin dilaporkan.");

@@ -195,6 +195,42 @@
     .circle-btn.left { left: 10px; }
     .circle-btn.right { right: 10px; }
 
+    .custom-select {
+  width: 100%;
+  background: #2a2a2a;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+}
+
+.custom-select ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  background: #2a2a2a;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 9999;
+}
+
+.custom-select ul.hidden {
+  display: none;
+}
+
+.custom-select ul li {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.custom-select ul li:hover {
+  background: #9333ea;
+}
+    
     /* Panel tengah */
     .floating-panel {
       position: fixed;
@@ -317,14 +353,17 @@
     <h3>Laporkan Bug</h3>
     <input type="text" id="reportName" placeholder="Nama (opsional)" style="width:100%; padding:8px; border-radius:8px; margin-bottom:10px;">
     <div id="bugOptions" style="margin-bottom: 10px;">
-  <select id="bugSelect" style="width: 100%; padding: 10px; border-radius: 8px; background: #2a2a2a; color: white; border: none;">
-    <option value="" disabled selected>📋 Pilih Jenis Bug</option>
-    <option value="Web Delay">WebSite Lemot Anjai</option>
-    <option value="Menu Eror">Menu Eror MinLaxs</option>
-    <option value="Link Eror">Link Eror MinLaxs</option>
-    <option value="Lagu Bug">Musik Bug MinLaxs</option>
-    <option value="MinLaxs No Counter">MinLaxs Terlalu OP</option>
-  </select>
+    <div class="custom-select" onclick="toggleCustomSelect()">
+  <span id="selectedBug">📋 Pilih Jenis Bug</span>
+  <ul id="bugList" class="hidden">
+    <li onclick="chooseBug('WebSite Lemot Anjai')">WebSite Lemot Anjai</li>
+    <li onclick="chooseBug('Menu Eror MinLaxs')">Menu Eror MinLaxs</li>
+    <li onclick="chooseBug('Link Eror MinLaxs')">Link Eror MinLaxs</li>
+    <li onclick="chooseBug('Musik Bug MinLaxs')">Musik Bug MinLaxs</li>
+    <li onclick="chooseBug('MinLaxs Terlalu OP')">MinLaxs Terlalu OP</li>
+  </ul>
+</div>
+<input type="hidden" id="bugSelect" />
     </div>
     <button onclick="submitReport()">Laporkan</button>
   </div>
@@ -578,6 +617,15 @@ const selected = bugSelect.value;
     }
   }
     }
+    function toggleCustomSelect() {
+  document.getElementById("bugList").classList.toggle("hidden");
+}
+
+function chooseBug(val) {
+  document.getElementById("selectedBug").textContent = val;
+  document.getElementById("bugSelect").value = val;
+  document.getElementById("bugList").classList.add("hidden");
+}
   </script>
 </body>
 </html>

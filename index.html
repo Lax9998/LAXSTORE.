@@ -318,7 +318,7 @@
     <input type="text" id="reportName" placeholder="Nama (opsional)" style="width:100%; padding:8px; border-radius:8px; margin-bottom:10px;">
     <div id="bugOptions" style="margin-bottom: 10px;">
   <select id="bugSelect" style="width: 100%; padding: 10px; border-radius: 8px; background: #2a2a2a; color: white; border: none;">
-    <option value="">-- Pilih Jenis Bug --</option>
+    <option value="" disabled selected>📋 Pilih Jenis Bug</option>
     <option value="Web Delay">WebSite Lemot Anjai</option>
     <option value="Menu Eror">Menu Eror MinLaxs</option>
     <option value="Link Eror">Link Eror MinLaxs</option>
@@ -529,7 +529,7 @@ const selected = bugSelect.value;
   localStorage.setItem("lax_reports", JSON.stringify(laporan));
 
   document.getElementById("reportName").value = "";
-  bugOptions.forEach(opt => opt.checked = false);
+  bugSelect.value = ""; // reset dropdown
   document.getElementById("popup-success").style.display = "flex";
   setTimeout(() => {
     const popup = document.getElementById("popup-success");

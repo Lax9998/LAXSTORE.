@@ -524,7 +524,7 @@
       if (!location.href.includes("?admin")) {
   const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
   const notif = laporan.find(l => l.status === "selesai" && l.notify);
-
+      }
   if (notif) {
     alert("✅ Laporan Anda telah diperbaiki. Terima kasih!");
     laporan.forEach(l => {
@@ -575,7 +575,7 @@
     function submitReport() {
   const bugSelect = document.getElementById("bugSelect");
 const selected = bugSelect.value;
-
+    }
   if (!selected) {
     alert("Silakan pilih jenis bug yang ingin dilaporkan.");
     return;
@@ -653,7 +653,8 @@ function chooseBug(val) {
   document.getElementById("selectedBug").textContent = val;
   document.getElementById("bugSelect").value = val;
   document.getElementById("bugList").classList.add("hidden");
-
+}
+    
 function toggleCustomSelect() {
   const list = document.getElementById("bugList");
   list.classList.toggle("hidden");

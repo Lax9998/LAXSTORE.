@@ -13,7 +13,6 @@
       background: #0e001f;
       color: white;
       height: 100%;
-      overflow: hidden;
     }
     body {
       display: flex;
@@ -250,6 +249,10 @@
       border-bottom: 1px solid #444;
     }
 
+    .custom-select ul li {
+  cursor: pointer;
+    }
+
     .custom-select ul li:hover {
       background: #9333ea;
     }
@@ -300,6 +303,16 @@
       vertical-align: middle;
       margin-right: 6px;
     }
+    .custom-select-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 1000; /* supaya selalu di atas */
+}
+
+.custom-select ul {
+  max-height: 200px;
+  overflow-y: auto;
+}
   </style>
 </head>
 <body>
@@ -648,7 +661,21 @@ function chooseBug(val) {
   document.getElementById("selectedBug").textContent = val;
   document.getElementById("bugSelect").value = val;
   document.getElementById("bugList").classList.add("hidden");
+
+function toggleCustomSelect() {
+  const list = document.getElementById("bugList");
+  list.classList.toggle("hidden");
+  console.log("Dropdown dibuka: ", !list.classList.contains("hidden"));
 }
+  
+  // Tutup dropdown jika klik di luar
+document.addEventListener("click", function(e) {
+  const select = document.querySelector(".custom-select");
+  const list = document.getElementById("bugList");
+  if (!select.contains(e.target)) {
+    list.classList.add("hidden");
+  }
+});
   </script>
 </body>
 </html>

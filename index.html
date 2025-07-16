@@ -211,6 +211,11 @@
   content: " ⬇️";
 }
     
+    .custom-select-wrapper {
+  position: relative;
+  width: 100%;
+    }
+    
     .custom-select {
       width: 100%;
       background: #2a2a2a;
@@ -370,6 +375,7 @@
   <div id="reportForm" class="floating-panel hidden">
     <h3>Laporkan Bug</h3>
     <div id="bugOptions" style="margin-bottom: 10px;">
+    <div class="custom-select-wrapper">
     <div class="custom-select" onclick="toggleCustomSelect()">
   <span id="selectedBug">📋 Pilih Jenis Bug</span>
   <ul id="bugList" class="hidden">
@@ -379,6 +385,7 @@
     <li onclick="chooseBug('Musik Bug MinLaxs')">Musik Bug MinLaxs</li>
     <li onclick="chooseBug('MinLaxs Terlalu OP')">MinLaxs Terlalu OP</li>
   </ul>
+    </div>
 </div>
 <input type="hidden" id="bugSelect" />
     </div>

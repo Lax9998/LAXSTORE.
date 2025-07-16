@@ -196,6 +196,22 @@
     .circle-btn.right { right: 10px; }
 
     .custom-select {
+  width: 100%;
+  background: #1a1a1a;
+  padding: 12px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #9333ea;
+  box-shadow: 0 0 10px #9333ea;
+  text-align: center;
+}
+.custom-select span::after {
+  content: " ⬇️";
+}
+    
+    .custom-select {
       width: 100%;
       background: #2a2a2a;
       padding: 10px;
@@ -353,7 +369,6 @@
   <!-- Panel Bug Baru -->
   <div id="reportForm" class="floating-panel hidden">
     <h3>Laporkan Bug</h3>
-    <input type="text" id="reportName" placeholder="Nama (opsional)" style="width:100%; padding:8px; border-radius:8px; margin-bottom:10px;">
     <div id="bugOptions" style="margin-bottom: 10px;">
     <div class="custom-select" onclick="toggleCustomSelect()">
   <span id="selectedBug">📋 Pilih Jenis Bug</span>
@@ -543,7 +558,6 @@
      });
     
     function submitReport() {
-  const name = document.getElementById("reportName").value.trim();
   const bugSelect = document.getElementById("bugSelect");
 const selected = bugSelect.value;
 
@@ -563,7 +577,7 @@ const selected = bugSelect.value;
   const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
   laporan.push({
     waktu: new Date().toLocaleString(),
-    isi: selected + (name ? ` (Dari: ${name})` : ""),
+    isi: selected,
     status: "belum",
     notify: true
   });

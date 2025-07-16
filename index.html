@@ -481,11 +481,6 @@
         }
       });
 
-      function closePopup() {
-        popup.classList.add("fade-out");
-        setTimeout(() => popup.style.display = "none", 400);
-      }
-
       const musicList = document.getElementById("musicList");
       const songs = [
         "music1.mp3", "music2.mp3", "music3.mp3"
@@ -676,6 +671,15 @@ document.addEventListener("click", function(e) {
     list.classList.add("hidden");
   }
 });
+  
+  function closePopup() {
+  const popup = document.getElementById("popup-welcome");
+  popup.classList.add("fade-out");
+  setTimeout(() => {
+    popup.style.display = "none";
+    popup.classList.remove("fade-out");
+  }, 400);
+  }
   </script>
 </body>
 </html>

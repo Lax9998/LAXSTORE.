@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LAXSTORE #1 SE-NUSANTARA</title>
+  <title>LAXSTORE</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
   <style>
     html, body {
@@ -195,6 +195,60 @@
     .circle-btn.left { left: 10px; }
     .circle-btn.right { right: 10px; }
 
+    .custom-select {
+  width: 100%;
+  background: #1a1a1a;
+  padding: 12px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #9333ea;
+  box-shadow: 0 0 10px #9333ea;
+  text-align: center;
+}
+.custom-select span::after {
+  content: " ⬇️";
+}
+    
+    .custom-select {
+      width: 100%;
+      background: #2a2a2a;
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      position: relative;
+      text-align: left;
+    }
+
+    .custom-select ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      position: absolute;
+      background: #2a2a2a;
+      width: 100%;
+      top: 100%;
+      left: 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      z-index: 9999;
+    }
+
+    .custom-select ul.hidden {
+      display: none;
+    }
+
+    .custom-select ul li {
+      padding: 10px;
+      border-bottom: 1px solid #444;
+    }
+
+    .custom-select ul li:hover {
+      background: #9333ea;
+    }
+    
     /* Panel tengah */
     .floating-panel {
       position: fixed;
@@ -314,19 +368,21 @@
   
   <!-- Panel Bug Baru -->
   <div id="reportForm" class="floating-panel hidden">
-    <h3>‼️ Laporkan Bug WebSite ‼️</h3>
-    <input type="text" id="reportName" placeholder="Nama (opsional)" style="width:100%; padding:8px; border-radius:8px; margin-bottom:10px;">
+    <h3>Laporkan Bug</h3>
     <div id="bugOptions" style="margin-bottom: 10px;">
-  <select id="bugSelect" style="width: 100%; padding: 10px; border-radius: 8px; background: #2a2a2a; color: white; border: none;">
-    <option value="" disabled selected>📋 Pilih Jenis Bug 📋</option>
-    <option value="Web Delay">WebSite Lemot Anjai</option>
-    <option value="Menu Eror">Menu Eror MinLaxs</option>
-    <option value="Link Eror">Link Eror MinLaxs</option>
-    <option value="Lagu Bug">Musik Bug MinLaxs</option>
-    <option value="MinLaxs No Counter">MinLaxs Terlalu OP</option>
-  </select>
+    <div class="custom-select" onclick="toggleCustomSelect()">
+  <span id="selectedBug">📋 Pilih Jenis Bug</span>
+  <ul id="bugList" class="hidden">
+    <li onclick="chooseBug('WebSite Lemot Anjai')">WebSite Lemot Anjai</li>
+    <li onclick="chooseBug('Menu Eror MinLaxs')">Menu Eror MinLaxs</li>
+    <li onclick="chooseBug('Link Eror MinLaxs')">Link Eror MinLaxs</li>
+    <li onclick="chooseBug('Musik Bug MinLaxs')">Musik Bug MinLaxs</li>
+    <li onclick="chooseBug('MinLaxs Terlalu OP')">MinLaxs Terlalu OP</li>
+  </ul>
+</div>
+<input type="hidden" id="bugSelect" />
     </div>
-    <button onclick="submitReport()">Kirim</button>
+    <button onclick="submitReport()">Laporkan</button>
   </div>
 
   <!-- Panel Musik -->
@@ -439,7 +495,7 @@
         <div>${l.isi}</div>
         <div>Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}</div>
         ${l.status === "belum"
-          ? `<button onclick="selesaikanLaporan(${i})">✅ Selesai</button>`
+          ? `<button onclick="selesaikanLaporan(${i})">✅ Tandai Selesai</button>`
           : ""}
         <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
       </div>
@@ -502,7 +558,6 @@
      });
     
     function submitReport() {
-  const name = document.getElementById("reportName").value.trim();
   const bugSelect = document.getElementById("bugSelect");
 const selected = bugSelect.value;
 
@@ -522,7 +577,7 @@ const selected = bugSelect.value;
   const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
   laporan.push({
     waktu: new Date().toLocaleString(),
-    isi: selected + (name ? ` (Dari: ${name})` : ""),
+    isi: selected,
     status: "belum",
     notify: true
   });
@@ -578,6 +633,15 @@ const selected = bugSelect.value;
     }
   }
     }
+    function toggleCustomSelect() {
+  document.getElementById("bugList").classList.toggle("hidden");
+}
+
+function chooseBug(val) {
+  document.getElementById("selectedBug").textContent = val;
+  document.getElementById("bugSelect").value = val;
+  document.getElementById("bugList").classList.add("hidden");
+}
   </script>
 </body>
 </html>

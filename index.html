@@ -13,6 +13,7 @@
       background: #0e001f;
       color: white;
       height: 100%;
+      overflow: hidden;
     }
     body {
       display: flex;
@@ -58,13 +59,6 @@
       color: #ccc;
       margin-bottom: 30px;
       z-index: 2;
-    }
-    #bugSelect {
-      background: #2a2a2a;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px;
     }
     .menu-container {
       display: grid;
@@ -142,16 +136,6 @@
       text-align: center;
       animation: float 2s ease-in-out infinite;
     }
-    .popup-box-container {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      animation: float 2s ease-in-out infinite;
-    }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
@@ -194,69 +178,6 @@
     .circle-btn.left { left: 10px; }
     .circle-btn.right { right: 10px; }
 
-    .custom-select {
-  width: 100%;
-  background: #1a1a1a;
-  padding: 12px;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  border: 1px solid #9333ea;
-  box-shadow: 0 0 10px #9333ea;
-  text-align: center;
-}
-.custom-select span::after {
-  content: " ⬇️";
-}
-    
-    .custom-select-wrapper {
-  position: relative;
-  width: 100%;
-    }
-    
-    .custom-select {
-      width: 100%;
-      background: #2a2a2a;
-      padding: 10px;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
-      position: relative;
-      text-align: left;
-    }
-
-    .custom-select ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      position: absolute;
-      background: #2a2a2a;
-      width: 100%;
-      top: 100%;
-      left: 0;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      z-index: 9999;
-    }
-
-    .custom-select ul.hidden {
-      display: none;
-    }
-
-    .custom-select ul li {
-      padding: 10px;
-      border-bottom: 1px solid #444;
-    }
-
-    .custom-select ul li {
-  cursor: pointer;
-    }
-
-    .custom-select ul li:hover {
-      background: #9333ea;
-    }
-    
     /* Panel tengah */
     .floating-panel {
       position: fixed;
@@ -299,20 +220,6 @@
     .floating-panel ul li:hover {
       background: #9333ea;
     }
-    .floating-panel ul li img {
-      vertical-align: middle;
-      margin-right: 6px;
-    }
-    .custom-select-wrapper {
-  position: relative;
-  width: 100%;
-  z-index: 1000; /* supaya selalu di atas */
-}
-
-.custom-select ul {
-  max-height: 200px;
-  overflow-y: auto;
-}
   </style>
 </head>
 <body>
@@ -353,7 +260,7 @@
       <img src="https://img.icons8.com/clouds/100/tiktok.png"/>
       <div class="menu-label">TikTok</div>
     </div>
-    <div class="menu" onclick="window.location.href='https://www.youtube.com/@laxeeyt'">
+    <div class="menu" onclick="window.location.href='https://www.youtube.com/@laxstorejb'">
       <img src="https://img.icons8.com/bubbles/100/youtube-squared.png"/>
       <div class="menu-label">YouTube</div>
     </div>
@@ -375,63 +282,17 @@
     </div>
   </div>
 
-  <!-- Popup Sukses Laporan -->
-  <div id="popup-success" class="popup-box-container" style="display:none;">
-    <div class="popup-box">
-      <h2>Terima Kasih!</h2>
-      <p>Karena Telah Membuat Laporan Bug/Eror<br>MinLaxs Sesegera Mungkin Memperbaikinya</p>
-      <button onclick="closeSuccessPopup()">Tutup</button>
-    </div>
-  </div>
-  
-  <!-- Panel Bug Baru -->
+  <!-- Panel Bug -->
   <div id="reportForm" class="floating-panel hidden">
-    <h3>Laporkan Bug</h3>
-    <div id="bugOptions" style="margin-bottom: 10px;">
-    <div class="custom-select-wrapper">
-    <div class="custom-select" onclick="toggleCustomSelect()">
-  <span id="selectedBug">📋 Pilih Jenis Bug</span>
-  <ul id="bugList" class="hidden">
-    <li onclick="chooseBug('WebSite Lemot Anjai')">WebSite Lemot Anjai</li>
-    <li onclick="chooseBug('Menu Eror MinLaxs')">Menu Eror MinLaxs</li>
-    <li onclick="chooseBug('Link Eror MinLaxs')">Link Eror MinLaxs</li>
-    <li onclick="chooseBug('Musik Bug MinLaxs')">Musik Bug MinLaxs</li>
-    <li onclick="chooseBug('MinLaxs Terlalu OP')">MinLaxs Terlalu OP</li>
-  </ul>
-    </div>
-</div>
-<input type="hidden" id="bugSelect" />
-    </div>
-    <button onclick="submitReport()">Laporkan</button>
+    <h3>Laporan Bug</h3>
+    <textarea id="reportText" placeholder="Tulis laporan bug di sini..."></textarea>
+    <button onclick="submitReport()">Kirim</button>
   </div>
 
   <!-- Panel Musik -->
   <div id="musicMenu" class="floating-panel hidden">
     <h3>Lagunya Orang Tulus</h3>
     <ul id="musicList"></ul>
-  </div>
-
-  <!-- Panel Admin - Laporan -->
-  <div id="adminPanel" style="
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #1f1f1f;
-    padding: 20px;
-    border-radius: 12px;
-    z-index: 99999;
-    max-height: 80%;
-    overflow-y: auto;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 0 25px #a855f7;
-    text-align: center;
-  ">
-    <h3 style="color:white; margin-top:0;">📋 Laporan Masuk</h3>
-    <div id="adminReports" style="text-align:left; font-size:14px; color:#ccc;"></div>
-    <button onclick="closeAdminPanel()" style="margin-top:15px; background:#9333ea; color:white; border:none; padding:8px 15px; border-radius:8px;">Tutup</button>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -481,6 +342,11 @@
         }
       });
 
+      function closePopup() {
+        popup.classList.add("fade-out");
+        setTimeout(() => popup.style.display = "none", 400);
+      }
+
       const musicList = document.getElementById("musicList");
       const songs = [
         "music1.mp3", "music2.mp3", "music3.mp3"
@@ -498,41 +364,6 @@
         };
         musicList.appendChild(li);
       });
-      
-      if (location.href.includes("?admin")) {
-  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-
-  const laporanHTML = laporan.length === 0 
-    ? "<b>📭 Belum ada laporan masuk.</b>"
-    : laporan.map((l, i) => `
-      <div style="display:flex; flex-direction:column; gap:5px; margin-bottom:10px;">
-        <b>${l.waktu}</b>
-        <div>${l.isi}</div>
-        <div>Status: ${l.status === "selesai" ? "✅ Selesai" : "⏳ Belum"}</div>
-        ${l.status === "belum"
-          ? `<button onclick="selesaikanLaporan(${i})">✅ Tandai Selesai</button>`
-          : ""}
-        <button onclick="hapusLaporan(${i})">🗑️ Hapus</button>
-      </div>
-      <hr>
-    `).join("");
-
-  document.getElementById("adminReports").innerHTML = laporanHTML;
-  document.getElementById("adminPanel").style.display = "block";
-      }
-      
-      if (!location.href.includes("?admin")) {
-  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-  const notif = laporan.find(l => l.status === "selesai" && l.notify);
-      }
-  if (notif) {
-    alert("✅ Laporan Anda telah diperbaiki. Terima kasih!");
-    laporan.forEach(l => {
-      if (l.status === "selesai") l.notify = false;
-    });
-    localStorage.setItem("lax_reports", JSON.stringify(laporan));
-  }
-      }
     });
 
     function togglePanel(type) {
@@ -553,132 +384,21 @@
       document.getElementById("musicMenu").classList.add("hidden");
     }
 
-        // Saat tab ditinggalkan
-    document.addEventListener("visibilitychange", function () {
-      const audio = document.getElementById("bg-music");
-      if (document.hidden) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    });
-
-        // Saat halaman ditutup / reload
-     window.addEventListener("beforeunload", function () {
-       const audio = document.getElementById("bg-music");
-       if (!audio.paused) {
-         audio.pause();
-         audio.currentTime = 0;
-       }
-       return null;
-     });
-    
     function submitReport() {
-      const bugSelect = document.getElementById("bugSelect");
-      const selected = bugSelect.value;
-
-      if (!selected) {
-        alert("Silakan pilih jenis bug yang ingin dilaporkan.");
-        return;
+      const text = document.getElementById("reportText").value.trim();
+      if (text) {
+        const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
+        laporan.push({ waktu: new Date().toLocaleString(), isi: text });
+        localStorage.setItem("lax_reports", JSON.stringify(laporan));
+        document.getElementById("reportText").value = "";
+        alert("Laporan berhasil dikirim!");
+        closePanels();
       }
+    }
 
-      const lastTime = localStorage.getItem("last_report_time");
-      const now = Date.now();
-      if (lastTime && now - parseInt(lastTime) < 60000) {
-        alert("Tunggu sebentar sebelum mengirim laporan lagi.");
-        return;
-      }
-      localStorage.setItem("last_report_time", now);
-
-      const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-       laporan.push({
-        waktu: new Date().toLocaleString(),
-        isi: selected,
-        status: "belum",
-        notify: true
-      });
-      localStorage.setItem("lax_reports", JSON.stringify(laporan));
-
-      bugSelect.value = "";
-      document.getElementById("selectedBug").textContent = "📋 Pilih Jenis Bug";
-
-      document.getElementById("popup-success").style.display = "flex";
-      setTimeout(() => {
-        const popup = document.getElementById("popup-success");
-        popup.classList.add("fade-out");
-        setTimeout(() => {
-          popup.style.display = "none";
-          popup.classList.remove("fade-out");
-        }, 400);
-      }, 5000);
-      closePanels();
+    if (location.href.includes("?admin")) {
+      console.log("📋 Laporan Masuk:", JSON.parse(localStorage.getItem("lax_reports") || "[]"));
     }
-    
-    function closeAdminPanel() {
-      const panel = document.getElementById("adminPanel");
-      panel.classList.add("fade-out");
-      setTimeout(() => {
-        panel.style.display = "none";
-        panel.classList.remove("fade-out");
-     }, 400);
-    }
-    function closeSuccessPopup() {
-      const popup = document.getElementById("popup-success");
-      popup.classList.add("fade-out");
-      setTimeout(() => {
-        popup.style.display = "none";
-        popup.classList.remove("fade-out");
-     }, 400);
-    }
-    function selesaikanLaporan(index) {
-  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-  if (laporan[index]) {
-    laporan[index].status = "selesai";
-    laporan[index].notify = true;
-    localStorage.setItem("lax_reports", JSON.stringify(laporan));
-    location.reload(); // reload agar tampilan admin update
-  }
-    }
-    
-    function hapusLaporan(index) {
-  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-  if (laporan[index]) {
-    if (confirm("Yakin ingin menghapus laporan ini?")) {
-      laporan.splice(index, 1);
-      localStorage.setItem("lax_reports", JSON.stringify(laporan));
-      location.reload();
-    }
-  }
-    }
-    
-function chooseBug(val) {
-  document.getElementById("selectedBug").textContent = val;
-  document.getElementById("bugSelect").value = val;
-  document.getElementById("bugList").classList.add("hidden");
-}
-    
-function toggleCustomSelect() {
-  const list = document.getElementById("bugList");
-  list.classList.toggle("hidden");
-  console.log("Dropdown dibuka: ", !list.classList.contains("hidden"));
-}
-  
-  // Tutup dropdown jika klik di luar
-document.addEventListener("click", function(e) {
-  const select = document.querySelector(".custom-select");
-  const list = document.getElementById("bugList");
-  if (!select.contains(e.target)) {
-    list.classList.add("hidden");
-  }
-});
-  
-  function closePopup() {
-  const popup = document.getElementById("popup-welcome");
-  popup.classList.add("fade-out");
-  setTimeout(() => {
-    popup.style.display = "none";
-    popup.classList.remove("fade-out");
-  }, 400);
-  }
   </script>
 </body>
 </html>

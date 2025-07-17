@@ -573,44 +573,44 @@
      });
     
     function submitReport() {
-  const bugSelect = document.getElementById("bugSelect");
-  const selected = bugSelect.value;
+      const bugSelect = document.getElementById("bugSelect");
+      const selected = bugSelect.value;
 
-  if (!selected) {
-    alert("Silakan pilih jenis bug yang ingin dilaporkan.");
-    return;
-  }
+      if (!selected) {
+        alert("Silakan pilih jenis bug yang ingin dilaporkan.");
+        return;
+      }
 
-  const lastTime = localStorage.getItem("last_report_time");
-  const now = Date.now();
-  if (lastTime && now - parseInt(lastTime) < 60000) {
-    alert("Tunggu sebentar sebelum mengirim laporan lagi.");
-    return;
-  }
-  localStorage.setItem("last_report_time", now);
+      const lastTime = localStorage.getItem("last_report_time");
+      const now = Date.now();
+      if (lastTime && now - parseInt(lastTime) < 60000) {
+        alert("Tunggu sebentar sebelum mengirim laporan lagi.");
+        return;
+      }
+      localStorage.setItem("last_report_time", now);
 
-  const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
-  laporan.push({
-    waktu: new Date().toLocaleString(),
-    isi: selected,
-    status: "belum",
-    notify: true
-  });
-  localStorage.setItem("lax_reports", JSON.stringify(laporan));
+      const laporan = JSON.parse(localStorage.getItem("lax_reports") || "[]");
+       laporan.push({
+        waktu: new Date().toLocaleString(),
+        isi: selected,
+        status: "belum",
+        notify: true
+      });
+      localStorage.setItem("lax_reports", JSON.stringify(laporan));
 
-  bugSelect.value = "";
-  document.getElementById("selectedBug").textContent = "📋 Pilih Jenis Bug";
+      bugSelect.value = "";
+      document.getElementById("selectedBug").textContent = "📋 Pilih Jenis Bug";
 
-  document.getElementById("popup-success").style.display = "flex";
-  setTimeout(() => {
-    const popup = document.getElementById("popup-success");
-    popup.classList.add("fade-out");
-    setTimeout(() => {
-      popup.style.display = "none";
-      popup.classList.remove("fade-out");
-    }, 400);
-  }, 5000);
-  closePanels();
+      document.getElementById("popup-success").style.display = "flex";
+      setTimeout(() => {
+        const popup = document.getElementById("popup-success");
+        popup.classList.add("fade-out");
+        setTimeout(() => {
+          popup.style.display = "none";
+          popup.classList.remove("fade-out");
+        }, 400);
+      }, 5000);
+      closePanels();
     }
     
     function closeAdminPanel() {

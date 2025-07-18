@@ -373,6 +373,16 @@
       document.getElementById("reportForm").classList.add("hidden");
       document.getElementById("musicMenu").classList.add("hidden");
     }
+    
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        audio.pause();
+      }
+    });
+
+    window.addEventListener("beforeunload", function () {
+      audio.pause();
+    });
   </script>
 </body>
 </html>

@@ -315,10 +315,11 @@
       logo.src = logos[i];
     }, 6500);
 
+    const audio = document.getElementById("bg-music");
+
     document.addEventListener("DOMContentLoaded", () => {
       const popup = document.getElementById("popup-welcome");
       const closeBtn = document.querySelector("#popup-welcome button");
-      const audio = document.getElementById("bg-music");
 
       closeBtn.addEventListener("click", () => {
         audio.play().catch(() => {});
@@ -376,8 +377,10 @@
     
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) {
-        audio.pause();
-      }
+        audio.pause();
+      } else {
+        audio.play().catch(() => {});
+      }
     });
 
     window.addEventListener("beforeunload", function () {

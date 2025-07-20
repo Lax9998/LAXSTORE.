@@ -326,6 +326,21 @@
     .hidden {
       display: none;
     }
+
+    /* 🔒 Kunci tampilan desktop agar seperti HP (potret) */
+    @media (min-width: 768px) {
+      body {
+        max-width: 420px;
+        margin: 0 auto;
+        height: 100vh;
+        overflow-y: auto;
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+      }
+      html {
+        background: #000; /* agar background luar tetap gelap */
+      }
+    }
   </style>
 </head>
 <body>

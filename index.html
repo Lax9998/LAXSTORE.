@@ -187,7 +187,7 @@
       background: #1f1f1f;
       padding: 20px;
       border-radius: 12px;
-      z-index: 998;
+      z-index: 9998;
       box-shadow: 0 0 15px #a855f7;
       width: 90%;
       max-width: 320px;
@@ -220,6 +220,112 @@
     .floating-panel ul li:hover {
       background: #9333ea;
     }
+    
+    .join-partner-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .join-btn {
+      padding: 8px 16px;
+      background: linear-gradient(to right, #00c853, #64dd17);
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .join-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #00e676, #76ff03);
+    }
+    ol {
+      padding-left: 20px;
+      text-align: left;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    #announcementPanel h3 {
+      color: white;
+      text-align: center;
+    }
+    #announcementPanel ol {
+      color: #ccc;
+      text-align: left;
+    }
+    
+    /* Popup partner menu */
+    .popup-menu {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      z-index: 9999;
+      width: 280px;
+    }
+
+    .popup-content {
+      position: relative;
+    }
+
+    .popup-menu .close-btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 20px;
+      color: white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .partner-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .partner-links a.menu-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #222;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .partner-links a.menu-item:hover {
+      background: #333;
+    }
+
+    .partner-links a.menu-item img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .partner-links a.menu-item span {
+      font-size: 16px;
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -245,7 +351,7 @@
       <img src="https://img.icons8.com/?size=100&id=TEYr8ETaIfBJ&format=png&color=000000"/>
       <div class="menu-label">Instagram</div>
     </div>
-    <div class="menu" onclick="window.location.href='https://chat.whatsapp.com/GXcIplJw8bj9V84zdl0uGP'">
+    <div class="menu" onclick="window.location.href='https://chat.whatsapp.com/LNExgTyPgdGISC2xLm1XdK?mode=r_t'">
       <img src="https://img.icons8.com/?size=100&id=108653&format=png&color=000000"/>
       <div class="menu-label">Grup JB</div>
     </div>
@@ -253,13 +359,13 @@
       <img src="https://img.icons8.com/?size=100&id=108636&format=png&color=000000"/>
       <div class="menu-label">Saluran</div>
     </div>
-    <div class="menu" onclick="window.location.href='https://www.tiktok.com/@laxstorejb'">
-      <img src="https://img.icons8.com/clouds/100/tiktok.png"/>
-      <div class="menu-label">TikTok</div>
+    <div class="menu" onclick="togglePanel('partner')">
+      <img src="https://img.icons8.com/clouds/100/conference-call.png"/>
+      <div class="menu-label">PartNer</div>
     </div>
-    <div class="menu" onclick="window.location.href='https://www.youtube.com/@laxstorejb'">
-      <img src="https://img.icons8.com/bubbles/100/youtube-squared.png"/>
-      <div class="menu-label">YouTube</div>
+    <div class="menu" onclick="togglePanel('announcement')">
+      <img src="https://img.icons8.com/bubbles/100/error.png"/>
+      <div class="menu-label">Bahaya</div>
     </div>
   </div>
 
@@ -281,9 +387,122 @@
 
   <!-- Panel Musik -->
   <div id="musicMenu" class="floating-panel hidden">
+    <button onclick="closeMusic()" style="
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      background: transparent;
+      border: none;
+      font-weight: bold;
+      font-size: 20px;
+      cursor: pointer;
+    ">❌</button>
     <h3>Lagunya Orang Tulus</h3>
     <ul id="musicList"></ul>
   </div>
+  
+  <!-- Panel Partner (Direvisi: 4 gambar + nama) -->
+  <div id="partnerPanel" class="floating-panel hidden">
+    <button onclick="closePartner()" style="
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      background: transparent;
+      border: none;
+      font-weight: bold;
+      font-size: 20px;
+      cursor: pointer;
+    ">❌</button>
+    <h3 style="color: white;">PARTNER LAXSTORE</h3><br>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+
+    <!-- Partner 1 -->
+    <div style="text-align: center;">
+      <img src="pt1.jpg" 
+         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
+         onclick="openPartnerPopup('pt1')" 
+         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
+      <div style="color: white;">Partner Open</div>
+    </div>
+
+    <!-- Partner 2 -->
+    <div style="text-align: center;">
+      <img src="pt2.jpg" 
+         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
+         onclick="openPartnerPopup('pt2')" 
+         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
+      <div style="color: white;">Partner Open</div>
+    </div>
+
+    <!-- Partner 3 -->
+    <div style="text-align: center;">
+      <img src="pt3.jpg" 
+         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
+         onclick="openPartnerPopup('pt3')" 
+         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
+      <div style="color: white;">Partner Open</div>
+    </div>
+
+    <!-- Partner 4 -->
+    <div style="text-align: center;">
+      <img src="pt4.jpg" 
+         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
+         onclick="openPartnerPopup('pt4')" 
+         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
+      <div style="color: white;">Partner Open</div>
+    </div>
+</div>
+  
+ <div class="join-partner-container">
+  <a href="https://wa.me/6285642962052?text=Halo%20MinLaxs%20Saya%20ingin%20join%20partner" target="_blank" class="join-btn">Join Partner</a>
+  </div>
+  </div>
+  
+  <!-- Popup Detail Partner -->
+  <div id="popupPartnerMenu" class="popup-menu hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePartnerPopup()">❌</span>
+      <h3 style="color:white; text-align:center;">PARTNER INFO</h3>
+      <div class="partner-links">
+        <div class="partner-info-text">
+         👤 Owner: @adminlaxstore<br>
+         💬 Grup WA: wa.me/xxx<br>
+         📢 Saluran: @laxstorechannel<br>
+       </div>
+      </div>
+    </div>
+  </div>
+  
+ <!-- Panel Announcement (Direvisi: hanya teks) -->
+ <div id="announcementPanel" class="floating-panel hidden">
+   <button onclick="document.getElementById('announcementPanel').classList.add('hidden')" 
+          style="position:absolute; top:10px; right:15px; background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">
+    ×
+  </button>
+  
+   <h3>‼️ IKUTI SARAN MINLAXS ‼️</h3>
+    <ol style="color: #ccc; text-align: left;">
+      <ol>
+        <li>Hindari Trx Jika Di Chat Duluan Dengan Mengatasnamakan Store Besar/Femes</li>
+        <li>Hindari Trx No PP Wa (PP Kosong) Bisa Jadi Clone/Nokos yang Sering Ripper Gunakan </li>
+        <li>Hindari Trx Sistem Direct/SisP/Delay Jika Seller No Ident / Gd Jaminan Rawan Ripper</li>
+        <li>Hindari Trx Akun Murah Spek Gahar Rawan Ripper Perlu Cek Nomer Seller Terlebih Dahulu</li>
+        <li>Hindari Trx dengan Store Berkaitan Dengan nama Cewe Sudah Pasti Oknum Hode G Modal</li>
+        <li>Hindari Trx Log FB Ribet Salah Pw Perlu Di Bengkel Perlu Nombok Ujung"x Kena Ripp/HB</li>
+        <li>Hindari Trx Mc/Rekber Diatur Seller (Bukan Setempat) Jangan Mau Diiming" Bayar 2xLipat</li>
+        <li>Hindari Trx Bind Mati/Hilang Wajib AllReff + Wajib Cocokan Email Perangkat dan Bind FF</li>
+        <li>Hindari Trx Bind Sepaket Jika Hanya Dikasih Email + Code Verif Disuruh Copot/Ganti Bind karena Perlu 15 Hari Hati" Tergocek Kang HB</li>
+      </ol>
+      
+    <h3 style="color: white;">⁉️ Jika Masih Kurang Memahami Tentang Penjelasan Bahaya Transaksi Yang Ada Di JB Bisa Langsung Tanyakan MinLaxs😎🤙</h3>
+ </div>
+
+    <div id="announcementPopup" class="popup-box" style="display:none; position:fixed; z-index:9999; left:50%; top:50%; transform:translate(-50%, -50%); background:#1a1a1a; border: 1px solid #a855f7;">
+      <h2 id="announcementText" style="color:white; margin-bottom:10px;"></h2>
+      <button onclick="document.getElementById('announcementPopup').style.display='none'">Tutup</button>
+    </div>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
@@ -332,6 +551,14 @@
           closePopup();
         }
       });
+      
+      // Otomatis menutup popup setelah 7 detik
+      setTimeout(() => {
+        if (popup.style.display !== "none") {
+        audio.play().catch(() => {});
+        closePopup();
+       }
+      }, 7000);
 
       function closePopup() {
         popup.classList.add("fade-out");
@@ -360,14 +587,18 @@
     function togglePanel(type) {
       const report = document.getElementById("reportForm");
       const music = document.getElementById("musicMenu");
+      const partner = document.getElementById("partnerPanel");
+      const announcement = document.getElementById("announcementPanel");
 
-      if (type === "report") {
-        report.classList.toggle("hidden");
-        music.classList.add("hidden");
-      } else if (type === "music") {
-        music.classList.toggle("hidden");
-        report.classList.add("hidden");
-      }
+      report?.classList.add("hidden");
+      music?.classList.add("hidden");
+      partner?.classList.add("hidden");
+      announcement?.classList.add("hidden");
+
+      if (type === "report") report?.classList.toggle("hidden");
+      if (type === "music") music?.classList.toggle("hidden");
+      if (type === "partner") partner?.classList.toggle("hidden");
+      if (type === "announcement") announcement?.classList.toggle("hidden");
     }
 
     function closePanels() {
@@ -376,16 +607,65 @@
     }
     
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden) {
-        audio.pause();
-      } else {
-        audio.play().catch(() => {});
-      }
+     if (document.hidden) {
+      audio.pause();
+     } else {
+      audio.play().catch(() => {});
+     }
     });
 
     window.addEventListener("beforeunload", function () {
-      audio.pause();
+     audio.pause();
     });
+    
+    function showAnnouncement(text) {
+      const popup = document.getElementById("announcementPopup");
+      const message = document.getElementById("announcementText");
+      message.textContent = text;
+      popup.style.display = "block";
+    }
+    
+    // Fungsi buka popup
+  function openPartnerPopup(partnerName) {
+    // Jika ingin popup beda per partner, bisa gunakan `partnerName` untuk isi dinamis
+    document.getElementById("popupPartnerMenu").classList.remove("hidden");
+  }
+  function closePartnerPopup() {
+   document.getElementById("popupPartnerMenu").classList.add("hidden");
+  }
+  function closeMusic() {
+    document.getElementById("musicMenu").classList.add("hidden");
+  }
+
+  function closePartner() {
+    document.getElementById("partnerPanel").classList.add("hidden");
+  }
+  
+  // Blokir klik kanan
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Blokir shortcut umum: F12, Ctrl+Shift+I, Ctrl+U, dll
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  // Deteksi devtools terbuka (sederhana)
+  setInterval(function() {
+    const before = new Date().getTime();
+    debugger;
+    const after = new Date().getTime();
+    if (after - before > 100) {
+      document.body.innerHTML = '<h1 style="color:red;text-align:center;">Access Blocked</h1>';
+    }
+  }, 1000);
   </script>
 </body>
 </html>

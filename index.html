@@ -404,7 +404,7 @@
   
   <!-- Panel Partner (Direvisi: 4 gambar + nama) -->
   <div id="partnerPanel" class="floating-panel hidden">
-    <button onclick="closePartner()" style="
+    <button onclick="closePartner('partnerPanel')" style="
       position: absolute;
       top: 10px;
       right: 10px;
@@ -422,16 +422,16 @@
     <div style="text-align: center;">
       <img src="pt1.jpg" 
          style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('pt1')" 
+         onclick="openPartnerPopup('popupPartner1')" 
          onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
-      <div style="color: white;">DUTZ STOREiv>
+      <div style="color: white;">DUTZ STORE</div>
     </div>
 
     <!-- Partner 2 -->
     <div style="text-align: center;">
       <img src="pt2.jpg" 
          style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('pt2')" 
+         onclick="openPartnerPopup('popupPartner2')" 
          onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
       <div style="color: white;">Partner Open</div>
     </div>
@@ -440,7 +440,7 @@
     <div style="text-align: center;">
       <img src="pt3.jpg" 
          style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('pt3')" 
+         onclick="openPartnerPopup('popupPartner3')" 
          onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
       <div style="color: white;">Partner Open</div>
     </div>
@@ -449,7 +449,7 @@
     <div style="text-align: center;">
       <img src="pt4.jpg" 
          style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('pt4')" 
+         onclick="openPartnerPopup('popupPartner4')" 
          onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
       <div style="color: white;">Partner Open</div>
     </div>
@@ -459,58 +459,62 @@
   <a href="https://wa.me/6285642962052?text=Halo%20MinLaxs%20Saya%20ingin%20join%20partner" target="_blank" class="join-btn">Join Partner</a>
   </div>
   </div>
-
-    <!-- Popup Detail Partner -->
-<div id="popupPartnerMenu" class="popup-menu hidden">
+  
+  <!-- Popup Partner 1 -->
+<div id="popupPartner1" class="popup-menu hidden">
   <div class="popup-content">
-    <span class="close-btn" onclick="closePartnerPopup()">❌</span>
-    <h3 style="color:white; text-align:center;">PARTNER INFO</h3>
-    <div class="partner-links" id="partnerLinksContainer">
-      <!-- Konten link akan diisi dari JS -->
-    </div>
+    <span class="close-btn" onclick="closePartner('popupPartner1')">❌</span>
+    <h3 style="color:white; text-align:center;">INFO DUTZ STORE</h3>
+    <div class="partner-buttons">
+  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
+  <button onclick="window.open('https://chat.whatsapp.com/Jy4WSrlZp0L7D6jQRCRPEX?mode=r_t', '_blank')">💬 Grup JB</button><br><br>
+  <button onclick="window.open('https://whatsapp.com/channel/0029VbB35ic6LwHi2HbT5Z3P', '_blank')">📢 Saluran Testi</button><br>
+</div>
+<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
   </div>
 </div>
-    <script>
-const partnerLinks = {
-  1: [
-    { name: "Admin Partner 1", url: "https://linktr.ee/admin1" },
-    { name: "Grup Partner 1", url: "https://chat.whatsapp.com/partner1group" },
-    { name: "Channel Partner 1", url: "https://youtube.com/@partner1channel" }
-  ],
-  2: [
-    { name: "Admin Partner 2", url: "https://linktr.ee/admin2" },
-    { name: "Grup Partner 2", url: "https://chat.whatsapp.com/partner2group" },
-    { name: "Channel Partner 2", url: "https://youtube.com/@partner2channel" }
-  ],
-  3: [
-    { name: "Admin Partner 3", url: "https://linktr.ee/admin3" },
-    { name: "Grup Partner 3", url: "https://chat.whatsapp.com/partner3group" },
-    { name: "Channel Partner 3", url: "https://youtube.com/@partner3channel" }
-  ],
-  4: [
-    { name: "Admin Partner 4", url: "https://linktr.ee/admin4" },
-    { name: "Grup Partner 4", url: "https://chat.whatsapp.com/partner4group" },
-    { name: "Channel Partner 4", url: "https://youtube.com/@partner4channel" }
-  ]
-};
 
-function showPartnerPopup(partnerId) {
-  const popup = document.getElementById("partnerPopup");
-  const content = document.getElementById("partnerContent");
-  const links = partnerLinks[partnerId];
+<!-- Popup Partner 2 -->
+<div id="popupPartner2" class="popup-menu hidden">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePartner('popupPartner2')">❌</span>
+    <h3 style="color:white; text-align:center;">PARTNER</h3>
+    <div class="partner-buttons">
+  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
+  <button onclick="window.open('https://chat.whatsapp.com/XXXX', '_blank')">💬 GC JB</button><br><br>
+  <button onclick="window.open('https://t.me/laxstorechannel', '_blank')">📢 Saluran Stock/Testimoni</button><br>
+</div>
+<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
+  </div>
+</div>
 
-  content.innerHTML = links.map(link => 
-    `<div style="margin:10px 0;"><a href="${link.url}" target="_blank" style="color:lime;font-weight:bold;text-decoration:none;">${link.name}</a></div>`
-  ).join("");
+<!-- Popup Partner 3 -->
+<div id="popupPartner3" class="popup-menu hidden">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePartner('popupPartner3')">❌</span>
+    <h3 style="color:white; text-align:center;">PARTNER</h3>
+    <div class="partner-buttons">
+  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
+  <button onclick="window.open('https://chat.whatsapp.com/XXXX', '_blank')">💬 GC JB</button><br><br>
+  <button onclick="window.open('https://t.me/laxstorechannel', '_blank')">📢 Saluran Stock/Testimoni</button><br>
+</div>
+<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
+  </div>
+</div>
 
-  popup.style.display = "block";
-
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 8000); // Otomatis tertutup dalam 8 detik
-}
-</script>
-
+<!-- Popup Partner 4 -->
+<div id="popupPartner4" class="popup-menu hidden">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePartner('popupPartner4')">❌</span>
+    <h3 style="color:white; text-align:center;">PARTNER</h3>
+    <div class="partner-buttons">
+  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
+  <button onclick="window.open('https://chat.whatsapp.com/XXXX', '_blank')">💬 GC JB</button><br><br>
+  <button onclick="window.open('https://t.me/laxstorechannel', '_blank')">📢 Saluran Stock/Testimoni</button><br>
+</div>
+<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
+  </div>
+</div>
   
  <!-- Panel Announcement (Direvisi: hanya teks) -->
  <div id="announcementPanel" class="floating-panel hidden">
@@ -619,49 +623,9 @@ function showPartnerPopup(partnerId) {
         };
         musicList.appendChild(li);
       });
-    };
-    
-const partnerLinks = {
-  1: [
-    { name: "Admin Partner 1", url: "https://linktr.ee/admin1" },
-    { name: "Grup Partner 1", url: "https://chat.whatsapp.com/partner1group" },
-    { name: "Channel Partner 1", url: "https://youtube.com/@partner1channel" }
-  ],
-  2: [
-    { name: "Admin Partner 2", url: "https://linktr.ee/admin2" },
-    { name: "Grup Partner 2", url: "https://chat.whatsapp.com/partner2group" },
-    { name: "Channel Partner 2", url: "https://youtube.com/@partner2channel" }
-  ],
-  3: [
-    { name: "Admin Partner 3", url: "https://linktr.ee/admin3" },
-    { name: "Grup Partner 3", url: "https://chat.whatsapp.com/partner3group" },
-    { name: "Channel Partner 3", url: "https://youtube.com/@partner3channel" }
-  ],
-  4: [
-    { name: "Admin Partner 4", url: "https://linktr.ee/admin4" },
-    { name: "Grup Partner 4", url: "https://chat.whatsapp.com/partner4group" },
-    { name: "Channel Partner 4", url: "https://youtube.com/@partner4channel" }
-  ]
-};
+    });
 
-function showPartnerPopup(partnerId) {
-  const popup = document.getElementById("partnerPopup");
-  const content = document.getElementById("partnerContent");
-  const links = partnerLinks[partnerId];
-
-  content.innerHTML = links.map(link => 
-    `<div style="margin:10px 0;"><a href="${link.url}" target="_blank" style="color:lime;font-weight:bold;text-decoration:none;">${link.name}</a></div>`
-  ).join("");
-
-  popup.style.display = "block";
-
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 8000); // Otomatis tertutup dalam 8 detik
-}
-
-
-  function togglePanel(type) {
+    function togglePanel(type) {
       const report = document.getElementById("reportForm");
       const music = document.getElementById("musicMenu");
       const partner = document.getElementById("partnerPanel");
@@ -718,6 +682,36 @@ function showPartnerPopup(partnerId) {
     document.getElementById("partnerPanel").classList.add("hidden");
   }
   
+  function openPartnerPopup(popupId) {
+    // Sembunyikan semua popup terlebih dahulu
+    const popups = document.querySelectorAll('.popup-menu');
+    popups.forEach(p => p.classList.add('hidden'));
+
+    // Tampilkan popup yang dimaksud
+    const popup = document.getElementById(popupId);
+    if (popup) {
+      popup.classList.remove('hidden');
+    }
+  }
+
+  function closePartner(popupId) {
+    if (popupId) {
+      document.getElementById(popupId).classList.add('hidden');
+    } else {
+      // Jika tidak ada ID, tutup semua
+      const popups = document.querySelectorAll('.popup-menu');
+      popups.forEach(p => p.classList.add('hidden'));
+    }
+  }
+  
+  function openPartner(id) {
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  function closePartner(id) {
+    document.getElementById(id).classList.add('hidden');
+  }
+  
   // Blokir klik kanan
   document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
@@ -745,4 +739,4 @@ function showPartnerPopup(partnerId) {
   }, 1000);
   </script>
 </body>
-</html>
+    </html>

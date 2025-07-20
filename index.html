@@ -424,7 +424,7 @@
          style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
          onclick="openPartnerPopup('pt1')" 
          onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
-      <div style="color: white;">Partner Open</div>
+      <div style="color: white;">DUTZ STOREiv>
     </div>
 
     <!-- Partner 2 -->
@@ -459,21 +459,17 @@
   <a href="https://wa.me/6285642962052?text=Halo%20MinLaxs%20Saya%20ingin%20join%20partner" target="_blank" class="join-btn">Join Partner</a>
   </div>
   </div>
-  
-  <!-- Popup Detail Partner -->
-  <div id="popupPartnerMenu" class="popup-menu hidden">
-    <div class="popup-content">
-      <span class="close-btn" onclick="closePartnerPopup()">❌</span>
-      <h3 style="color:white; text-align:center;">PARTNER INFO</h3>
-      <div class="partner-links">
-        <div class="partner-info-text">
-         👤 Owner: @adminlaxstore<br>
-         💬 Grup WA: wa.me/xxx<br>
-         📢 Saluran: @laxstorechannel<br>
-       </div>
-      </div>
+
+    <!-- Popup Detail Partner -->
+<div id="popupPartnerMenu" class="popup-menu hidden">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePartnerPopup()">❌</span>
+    <h3 style="color:white; text-align:center;">PARTNER INFO</h3>
+    <div class="partner-links" id="partnerLinksContainer">
+      <!-- Konten link akan diisi dari JS -->
     </div>
   </div>
+</div>
   
  <!-- Panel Announcement (Direvisi: hanya teks) -->
  <div id="announcementPanel" class="floating-panel hidden">
@@ -583,6 +579,46 @@
         musicList.appendChild(li);
       });
     });
+    
+const partnerData = {
+  1: {
+    admin: 'https://wa.me/6281234567890',
+    grup: 'https://chat.whatsapp.com/AAAAA11111',
+    saluran: 'https://whatsapp.com/channel/123456partner1'
+  },
+  2: {
+    admin: 'https://wa.me/6282234567890',
+    grup: 'https://chat.whatsapp.com/BBBBB22222',
+    saluran: 'https://whatsapp.com/channel/123456partner2'
+  },
+  3: {
+    admin: 'https://wa.me/6283234567890',
+    grup: 'https://chat.whatsapp.com/CCCCC33333',
+    saluran: 'https://whatsapp.com/channel/123456partner3'
+  },
+  4: {
+    admin: 'https://wa.me/6284234567890',
+    grup: 'https://chat.whatsapp.com/DDDDD44444',
+    saluran: 'https://whatsapp.com/channel/123456partner4'
+  }
+};
+
+function openPartnerPopup(id) {
+  const data = partnerData[id];
+  const container = document.getElementById('partnerLinksContainer');
+
+  container.innerHTML = `
+    <a href="${data.admin}" class="popup-link" target="_blank">👤 Admin</a><br>
+    <a href="${data.grup}" class="popup-link" target="_blank">👥 Grup WhatsApp</a><br>
+    <a href="${data.saluran}" class="popup-link" target="_blank">📢 Saluran</a>
+  `;
+
+  document.getElementById('popupPartnerMenu').classList.remove('hidden');
+}
+
+function closePartnerPopup() {
+  document.getElementById('popupPartnerMenu').classList.add('hidden');
+}
 
     function togglePanel(type) {
       const report = document.getElementById("reportForm");

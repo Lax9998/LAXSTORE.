@@ -521,27 +521,52 @@
 </div>
   
  <!-- Panel Announcement (Direvisi: hanya teks) -->
- <div id="announcementPanel" class="floating-panel hidden">
-   <button onclick="document.getElementById('announcementPanel').classList.add('hidden')" 
-          style="position:absolute; top:10px; right:15px; background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">
+ <div id="announcementPanel" class="floating-panel hidden"
+  style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: #111;
+    color: #fff;
+    border: 2px solid #a855f7;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  ">
+  <!-- Tombol tutup -->
+  <button onclick="document.getElementById('announcementPanel').classList.add('hidden')"
+    style="
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;">
     ×
   </button>
-  
-   <h3>‼️ IKUTI SARAN MINLAXS ‼️</h3>
-    <ol style="color: #ccc; text-align: left;">
-      <ol>
-        <li>Hindari Trx Jika Di Chat Duluan Dengan Mengatasnamakan Store Besar/Femes</li>
-        <li>Hindari Trx No PP Wa (PP Kosong) Bisa Jadi Clone/Nokos yang Sering Ripper Gunakan </li>
-        <li>Hindari Trx Sistem Direct/SisP/Delay Jika Seller No Ident / Gd Jaminan Rawan Ripper</li>
-        <li>Hindari Trx Akun Murah Spek Gahar Rawan Ripper Perlu Cek Nomer Seller Terlebih Dahulu</li>
-        <li>Hindari Trx dengan Store Berkaitan Dengan nama Cewe Sudah Pasti Oknum Hode G Modal</li>
-        <li>Hindari Trx Log FB Ribet Salah Pw Perlu Di Bengkel Perlu Nombok Ujung"x Kena Ripp/HB</li>
-        <li>Hindari Trx Mc/Rekber Diatur Seller (Bukan Setempat) Jangan Mau Diiming" Bayar 2xLipat</li>
-        <li>Hindari Trx Bind Mati/Hilang Wajib AllReff + Wajib Cocokan Email Perangkat dan Bind FF</li>
-        <li>Hindari Trx Bind Sepaket Jika Hanya Dikasih Email + Code Verif Disuruh Copot/Ganti Bind karena Perlu 15 Hari Hati" Tergocek Kang HB</li>
-      </ol>
-      
-    <h3 style="color: white;">⁉️ Jika Masih Kurang Memahami Tentang Penjelasan Bahaya Transaksi Yang Ada Di JB Bisa Langsung Tanyakan MinLaxs😎🤙</h3>
+
+  <h3 style="margin-top: 30px;">‼️ IKUTI SARAN MINLAXS ‼️</h3>
+  <ol style="color: #ccc; text-align: left; padding-left: 20px;">
+    <li>Hindari Trx Jika Di Chat Duluan Dengan Mengatasnamakan Store Besar/Femes</li>
+    <li>Hindari Trx No PP Wa (PP Kosong) Bisa Jadi Clone/Nokos yang Sering Ripper Gunakan </li>
+    <li>Hindari Trx Sistem Direct/SisP/Delay Jika Seller No Ident / Gd Jaminan Rawan Ripper</li>
+    <li>Hindari Trx Akun Murah Spek Gahar Rawan Ripper Perlu Cek Nomer Seller Terlebih Dahulu</li>
+    <li>Hindari Trx dengan Store Berkaitan Dengan nama Cewe Sudah Pasti Oknum Hode G Modal</li>
+    <li>Hindari Trx Log FB Ribet Salah Pw Perlu Di Bengkel Perlu Nombok Ujung&quot;x Kena Ripp/HB</li>
+    <li>Hindari Trx Mc/Rekber Diatur Seller (Bukan Setempat) Jangan Mau Diiming&quot; Bayar 2xLipat</li>
+    <li>Hindari Trx Bind Mati/Hilang Wajib AllReff + Wajib Cocokan Email Perangkat dan Bind FF</li>
+    <li>Hindari Trx Bind Sepaket Jika Hanya Dikasih Email + Code Verif Disuruh Copot/Ganti Bind karena Perlu 15 Hari Hati&quot; Tergocek Kang HB</li>
+  </ol>
+
+  <h3 style="color: white;">⁉️ Jika Masih Kurang Memahami Tentang Penjelasan Bahaya Transaksi Yang Ada Di JB Bisa Langsung Tanyakan MinLaxs 😎🤙</h3>
  </div>
 
     <div id="announcementPopup" class="popup-box" style="display:none; position:fixed; z-index:9999; left:50%; top:50%; transform:translate(-50%, -50%); background:#1a1a1a; border: 1px solid #a855f7;">
@@ -628,6 +653,8 @@
         musicList.appendChild(li);
       });
     });
+
+    document.getElementById('announcementPanel').classList.remove('hidden');
 
     function togglePanel(type) {
       const report = document.getElementById("reportForm");

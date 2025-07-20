@@ -470,6 +470,47 @@
     </div>
   </div>
 </div>
+    <script>
+const partnerLinks = {
+  1: [
+    { name: "Admin Partner 1", url: "https://linktr.ee/admin1" },
+    { name: "Grup Partner 1", url: "https://chat.whatsapp.com/partner1group" },
+    { name: "Channel Partner 1", url: "https://youtube.com/@partner1channel" }
+  ],
+  2: [
+    { name: "Admin Partner 2", url: "https://linktr.ee/admin2" },
+    { name: "Grup Partner 2", url: "https://chat.whatsapp.com/partner2group" },
+    { name: "Channel Partner 2", url: "https://youtube.com/@partner2channel" }
+  ],
+  3: [
+    { name: "Admin Partner 3", url: "https://linktr.ee/admin3" },
+    { name: "Grup Partner 3", url: "https://chat.whatsapp.com/partner3group" },
+    { name: "Channel Partner 3", url: "https://youtube.com/@partner3channel" }
+  ],
+  4: [
+    { name: "Admin Partner 4", url: "https://linktr.ee/admin4" },
+    { name: "Grup Partner 4", url: "https://chat.whatsapp.com/partner4group" },
+    { name: "Channel Partner 4", url: "https://youtube.com/@partner4channel" }
+  ]
+};
+
+function showPartnerPopup(partnerId) {
+  const popup = document.getElementById("partnerPopup");
+  const content = document.getElementById("partnerContent");
+  const links = partnerLinks[partnerId];
+
+  content.innerHTML = links.map(link => 
+    `<div style="margin:10px 0;"><a href="${link.url}" target="_blank" style="color:lime;font-weight:bold;text-decoration:none;">${link.name}</a></div>`
+  ).join("");
+
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 8000); // Otomatis tertutup dalam 8 detik
+}
+</script>
+
   
  <!-- Panel Announcement (Direvisi: hanya teks) -->
  <div id="announcementPanel" class="floating-panel hidden">
@@ -578,49 +619,49 @@
         };
         musicList.appendChild(li);
       });
-    });
+    };
     
-const partnerData = {
-  1: {
-    admin: 'https://wa.me/6281234567890',
-    grup: 'https://chat.whatsapp.com/AAAAA11111',
-    saluran: 'https://whatsapp.com/channel/123456partner1'
-  },
-  2: {
-    admin: 'https://wa.me/6282234567890',
-    grup: 'https://chat.whatsapp.com/BBBBB22222',
-    saluran: 'https://whatsapp.com/channel/123456partner2'
-  },
-  3: {
-    admin: 'https://wa.me/6283234567890',
-    grup: 'https://chat.whatsapp.com/CCCCC33333',
-    saluran: 'https://whatsapp.com/channel/123456partner3'
-  },
-  4: {
-    admin: 'https://wa.me/6284234567890',
-    grup: 'https://chat.whatsapp.com/DDDDD44444',
-    saluran: 'https://whatsapp.com/channel/123456partner4'
-  }
+const partnerLinks = {
+  1: [
+    { name: "Admin Partner 1", url: "https://linktr.ee/admin1" },
+    { name: "Grup Partner 1", url: "https://chat.whatsapp.com/partner1group" },
+    { name: "Channel Partner 1", url: "https://youtube.com/@partner1channel" }
+  ],
+  2: [
+    { name: "Admin Partner 2", url: "https://linktr.ee/admin2" },
+    { name: "Grup Partner 2", url: "https://chat.whatsapp.com/partner2group" },
+    { name: "Channel Partner 2", url: "https://youtube.com/@partner2channel" }
+  ],
+  3: [
+    { name: "Admin Partner 3", url: "https://linktr.ee/admin3" },
+    { name: "Grup Partner 3", url: "https://chat.whatsapp.com/partner3group" },
+    { name: "Channel Partner 3", url: "https://youtube.com/@partner3channel" }
+  ],
+  4: [
+    { name: "Admin Partner 4", url: "https://linktr.ee/admin4" },
+    { name: "Grup Partner 4", url: "https://chat.whatsapp.com/partner4group" },
+    { name: "Channel Partner 4", url: "https://youtube.com/@partner4channel" }
+  ]
 };
 
-function openPartnerPopup(id) {
-  const data = partnerData[id];
-  const container = document.getElementById('partnerLinksContainer');
+function showPartnerPopup(partnerId) {
+  const popup = document.getElementById("partnerPopup");
+  const content = document.getElementById("partnerContent");
+  const links = partnerLinks[partnerId];
 
-  container.innerHTML = `
-    <a href="${data.admin}" class="popup-link" target="_blank">👤 Admin</a><br>
-    <a href="${data.grup}" class="popup-link" target="_blank">👥 Grup WhatsApp</a><br>
-    <a href="${data.saluran}" class="popup-link" target="_blank">📢 Saluran</a>
-  `;
+  content.innerHTML = links.map(link => 
+    `<div style="margin:10px 0;"><a href="${link.url}" target="_blank" style="color:lime;font-weight:bold;text-decoration:none;">${link.name}</a></div>`
+  ).join("");
 
-  document.getElementById('popupPartnerMenu').classList.remove('hidden');
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 8000); // Otomatis tertutup dalam 8 detik
 }
 
-function closePartnerPopup() {
-  document.getElementById('popupPartnerMenu').classList.add('hidden');
-}
 
-    function togglePanel(type) {
+  function togglePanel(type) {
       const report = document.getElementById("reportForm");
       const music = document.getElementById("musicMenu");
       const partner = document.getElementById("partnerPanel");

@@ -1,767 +1,235 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LAXSTORE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Comic Neue', cursive;
-      background: #0e001f;
-      color: white;
-      height: 100%;
-      overflow: hidden;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      box-shadow: inset 0 0 10px #a855f7, inset 0 0 20px #9333ea, inset 0 0 30px #d946ef;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .logo-carousel {
-      width: 140px;
-      height: 140px;
-      margin-bottom: 10px;
-      z-index: 2;
-    }
-    .logo-carousel img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: 0 0 35px #a855f7, 0 0 55px #9333ea;
-    }
-    p {
-      font-size: 18px;
-      color: #ccc;
-      margin-bottom: 30px;
-      z-index: 2;
-    }
-    .menu-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 20px;
-      justify-content: center;
-      align-items: center;
-      z-index: 2;
-      max-width: 100%;
-      padding: 0 20px;
-    }
-    .menu {
-      background-color: #1a1a1a;
-      border-radius: 15px;
-      padding: 15px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(168,85,247,0.5), 0 0 30px rgba(147,51,234,0.4), inset 0 0 10px rgba(168,85,247,0.6);
-      transition: 0.3s ease;
-    }
-    .menu:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #a855f7, 0 0 40px #9333ea, inset 0 0 15px #d946ef;
-    }
-    .menu img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 0 5px #9333ea);
-    }
-    .menu-label {
-      font-size: 16px;
-      color: #fff;
-      text-shadow: 0 0 5px #a855f7;
-    }
-    .copyright {
-      position: absolute;
-      bottom: 10px;
-      font-size: 14px;
-      color: #888;
-      z-index: 2;
-      text-shadow: 0 0 5px #000;
-    }
-    @media (max-width: 600px) {
-      .menu-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-      .menu img {
-        width: 45px;
-        height: 45px;
-      }
-      .logo-carousel {
-        width: 200px;
-        height: 200px;
-      }
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>JB #1 SE-NUSANTARA</title>
 
-    /* Popup Welcome */
-    #popup-welcome {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-    .popup-box {
-      background-color: #1f1f1f;
-      border-radius: 15px;
-      padding: 20px 25px;
-      max-width: 90%;
-      box-shadow: 0 0 25px #a855f7;
-      text-align: center;
-      animation: float 2s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-    .popup-box h2 { color: #fff; font-size: 22px; margin-bottom: 8px; }
-    .popup-box p { color: #ccc; font-size: 16px; margin: 4px 0; }
-    .popup-box button {
-      margin-top: 15px;
-      background-color: #a855f7;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .fade-out { animation: fadeOut 0.4s forwards; }
-    @keyframes fadeOut {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0; transform: scale(0.8); }
-    }
+<style>
+  /* === FONT LOKAL === */
+  @font-face {
+    font-family: "LAXSFont";
+    src: url("fontlax.ttf") format("truetype");
+    font-display: swap;
+  }
 
-    /* Tombol bulat kiri & kanan */
-    .circle-btn {
-      position: fixed;
-      top: 10px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #9333ea;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      cursor: pointer;
-    }
-    .circle-btn img {
-      width: 60px;
-      height: 60px;
-    }
-    .circle-btn.left { left: 10px; }
-    .circle-btn.right { right: 10px; }
+  :root{
+    --bg:#0b0407; --bg-2:#13060a; --orange:#ff8c00; --yellow:#ffd166;
+    --text:#f6f6f6; --muted:#c5bfc4;
+    --card-glow:0 10px 25px rgba(255,140,0,.25);
+    --logo-glow:0 0 25px rgba(255,215,102,.7);
+    --grad:linear-gradient(135deg, #7a0018 0%, #b11226 35%, #ff8c00 70%, #ffd166 100%);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"LAXSFont",sans-serif;
+    background:linear-gradient(180deg, var(--bg-2), var(--bg));
+    color:var(--text);display:flex;flex-direction:column;
+    min-height:100vh;overflow:hidden;
+  }
+  main{flex:1;overflow:auto;}
 
-    /* Panel tengah */
-    .floating-panel {
-      position: fixed;
-      top: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1f1f1f;
-      padding: 20px;
-      border-radius: 12px;
-      z-index: 9998;
-      box-shadow: 0 0 15px #a855f7;
-      width: 90%;
-      max-width: 320px;
-      text-align: center;
-    }
-    .floating-panel.hidden {
-      display: none;
-    }
-    .floating-panel textarea {
-      width: 100%;
-      height: 80px;
-      margin-top: 10px;
-      border-radius: 8px;
-      padding: 10px;
-      border: none;
-      resize: none;
-    }
-    .floating-panel ul {
-      list-style: none;
-      padding: 0;
-    }
-    .floating-panel ul li {
-      padding: 6px 10px;
-      background: #2a2a2a;
-      margin: 5px 0;
-      border-radius: 6px;
-      cursor: pointer;
-      color: #fff;
-    }
-    .floating-panel ul li:hover {
-      background: #9333ea;
-    }
-    
-    .join-partner-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
+  .topbar{position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(130%) blur(8px);
+    background:linear-gradient(180deg, rgba(20,8,12,.75), rgba(11,4,7,.55));
+    border-bottom:1px solid rgba(255,140,0,.15);}
+  .wrap{max-width:1100px;margin:0 auto;padding:12px clamp(12px,3vw,18px);
+    display:flex;gap:14px;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;
+    text-transform:uppercase;font-size:clamp(18px,2.8vw,22px);}
+  .brand span:last-child{
+    font-family:"LAXSFont", sans-serif;
+    font-size:clamp(35px,3vw,26px);
+  }
+  .brand .dot{width:12px;height:12px;border-radius:50%;
+    background:conic-gradient(from 0deg,var(--orange),var(--yellow),var(--orange));
+    box-shadow:0 0 18px rgba(255,140,0,.75);}
+  .chip{padding:6px 10px;border-radius:999px;font-size:12px;
+    background:rgba(255,140,0,.2);border:1px solid rgba(255,140,0,.25);color:var(--yellow);}
 
-    .join-btn {
-      padding: 8px 16px;
-      background: linear-gradient(to right, #00c853, #64dd17);
-      color: white;
-      font-weight: bold;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: transform 0.2s ease;
-    }
+  /* === LOGO SLIDE === */
+  .logo-box{
+    display:flex;justify-content:center;margin:25px 0 30px 0;
+  }
+  .logo-box img{
+    width:200px;height:200px;object-fit:cover;
+    border-radius:50%;border:3px solid var(--yellow);
+    box-shadow:var(--logo-glow);
+    transition:opacity 1s ease-in-out;
+    position:absolute;
+  }
+  .logo-wrapper{
+    position:relative;width:200px;height:200px;
+  }
+  .logo-box img.hidden{opacity:0}
 
-    .join-btn:hover {
-      transform: scale(1.05);
-      background: linear-gradient(to right, #00e676, #76ff03);
-    }
-    ol {
-      padding-left: 20px;
-      text-align: left;
-    }
-    li {
-      margin-bottom: 8px;
-    }
-    #announcementPanel h3 {
-      color: white;
-      text-align: center;
-    }
-    #announcementPanel ol {
-      color: #ccc;
-      text-align: left;
-    }
-    
-    /* Popup partner menu */
-    .popup-menu {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #111;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-      z-index: 9999;
-      width: 280px;
-    }
+  /* === MENU GRID === */
+  .menu{
+    max-width:700px;margin:20px auto 40px auto;padding:0 14px;
+    display:grid;grid-template-columns:repeat(2,3fr);gap:14px;
+  }
+  .menu a, .menu button{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:8px;
+    padding:18px 14px;border-radius:var(--radius);
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,140,0,.2);
+    color:var(--text);font-weight:600;
+    text-decoration:none;font-size:14px;cursor:pointer;
+    box-shadow:var(--card-glow);
+    transition:.25s;text-align:center;
+    animation:ombak 5s ease-in-out infinite;
+    font-family:"LAXSFont",sans-serif;
+  }
+  .menu a img, .menu button img{
+    width:28px;height:28px;object-fit:contain;
+  }
+  .menu a:hover, .menu button:hover{
+    background:var(--grad);color:#210b0f;border-color:transparent;
+  }
 
-    .popup-content {
-      position: relative;
-    }
+  /* Animasi Ombak */
+  @keyframes ombak {
+    0%,100% { transform:translateX(0) rotate(0deg); }
+    25% { transform:translateX(3px) rotate(1deg); }
+    50% { transform:translateX(0) rotate(0deg); }
+    75% { transform:translateX(-3px) rotate(-1deg); }
+  }
 
-    .popup-menu .close-btn {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      font-size: 20px;
-      color: white;
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+  .foot{text-align:center;color:var(--yellow);font-size:12px;padding:8px;font-family:"LAXSFont",sans-serif;}
 
-    .partner-links {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .partner-links a.menu-item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      background: #222;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: background 0.3s ease;
-    }
-
-    .partner-links a.menu-item:hover {
-      background: #333;
-    }
-
-    .partner-links a.menu-item img {
-      width: 24px;
-      height: 24px;
-    }
-
-    .partner-links a.menu-item span {
-      font-size: 16px;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+  /* === POPUP === */
+  .popup{position:fixed;inset:0;background:rgba(0,0,0,.8);
+    display:flex;align-items:center;justify-content:center;
+    z-index:100;visibility:hidden;opacity:0;transition:.3s;}
+  .popup.show{visibility:visible;opacity:1;}
+  .popup-content{position:relative;background:#000;border-radius:12px;
+    max-width:90%;max-height:80%;padding:18px;color:var(--text);
+    line-height:1.6;font-size:15px;overflow:auto;
+    font-family:sans-serif;} /* <= popup tetap sans-serif */
+  .popup-content h2{margin-bottom:12px;color:var(--yellow);}
+  .x-btn{
+    position:absolute;top:10px;right:14px;
+    font-size:22px;font-weight:800;color:var(--yellow);
+    cursor:pointer;background:none;border:none;
+  }
+</style>
 </head>
 <body>
-  <div id="particles-js"></div>
-
-  <!-- Tombol Menu Bulat -->
-  <div class="circle-btn right" onclick="togglePanel('music')">
-    <img src="https://img.icons8.com/bubbles/100/add-song.png" alt="Music">
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span><span>LAXSTORE JB</span></div>
+    <span class="chip">JB BERGARANSI</span>
   </div>
+</header>
 
-  <div class="logo-carousel">
-    <img id="logoSwitch" src="logo1.png" alt="Logo">
-  </div>
-
-  <p>JB AKUN ALL GAME BERGARANSI</p>
-
-  <div class="menu-container">
-    <div class="menu" onclick="window.location.href='https://wa.me/6285642962052?text=Assalamualaikum%20Min%20Laxs'">
-      <img src="https://img.icons8.com/?size=100&id=4FCNwGpP4JDb&format=png&color=000000"/>
-      <div class="menu-label">MinLaxs</div>
-    </div>
-    <div class="menu" onclick="window.location.href='https://www.instagram.com/laxstorejb'">
-      <img src="https://img.icons8.com/?size=100&id=TEYr8ETaIfBJ&format=png&color=000000"/>
-      <div class="menu-label">Instagram</div>
-    </div>
-    <div class="menu" onclick="window.location.href='https://chat.whatsapp.com/LNExgTyPgdGISC2xLm1XdK?mode=r_t'">
-      <img src="https://img.icons8.com/?size=100&id=108653&format=png&color=000000"/>
-      <div class="menu-label">Grup JB</div>
-    </div>
-    <div class="menu" onclick="window.location.href='https://whatsapp.com/channel/0029Vb68P2X0LKZLMC407404'">
-      <img src="https://img.icons8.com/?size=100&id=108636&format=png&color=000000"/>
-      <div class="menu-label">Saluran</div>
-    </div>
-    <div class="menu" onclick="togglePanel('partner')">
-      <img src="https://img.icons8.com/clouds/100/conference-call.png"/>
-      <div class="menu-label">PartNer</div>
-    </div>
-    <div class="menu" onclick="togglePanel('announcement')">
-      <img src="https://img.icons8.com/bubbles/100/error.png"/>
-      <div class="menu-label">Bahaya</div>
+<main>
+  <!-- LOGO LINGKARAN -->
+  <div class="logo-box">
+    <div class="logo-wrapper">
+      <img src="logo1.png" alt="Logo 1" id="logo1">
+      <img src="logo2.png" alt="Logo 2" id="logo2" class="hidden">
     </div>
   </div>
 
-  <div class="copyright">&copy;LAXSTORE JB #1 SE-NUSANTARA</div>
+  <section class="menu">
+    <a href="https://wa.me/6285642962052" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WA"/> WA ADMIN
+    </a>
+    <a href="https://www.instagram.com/laxstorejb" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="IG"/> INSTAGRAM
+    </a>
+    <a href="https://chat.whatsapp.com/L2CDRuzAAtn766SMyKIFb7?mode=ems_copy_c" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/groups.png" alt="Komunitas"/> KOMUNITAS
+    </a>
+    <a href="https://whatsapp.com/channel/0029Vb68P2X0LKZLMC407404" target="_blank">
+      <img src="https://img.icons8.com/external-dashed-line-kawalan-studio/50/FFFFFF/external-whatsapp-status-social-media-dashed-line-kawalan-studio.png" alt="Saluran"/> SALURAN
+    </a>
+    <button onclick="openPopup('trx')">
+      <img src="https://img.icons8.com/ios/50/FFFFFF/receipt-approved.png" alt="TRX"/> CARA TRX
+    </button>
+    <button onclick="openPopup('bahaya')">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/high-risk.png" alt="Bahaya"/> BAHAYA
+    </button>
+  </section>
+</main>
 
-  <audio id="bg-music">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+<div class="foot">©LAXSTOREJB</br>- AMANAH TERPERCAYA BERGARANSI -</div>
 
-  <!-- Popup Welcome -->
-  <div id="popup-welcome">
-    <div class="popup-box">
-      <h2>Selamat Datang di Website Resmi LAXSTORE</h2>
-      <p>Menyediakan Layanan JB akun All Game Dan Menyediakan Jasa MC/Rekber Dan juga Kalian Bisa Join Grup JB & Saluran Stock</p>
-      <p>Enjoi Gan 🔥</p>
-      <button onclick="closePopup()">Tutup</button>
-    </div>
-  </div>
-
-  <!-- Panel Musik -->
-  <div id="musicMenu" class="floating-panel hidden">
-    <button onclick="closeMusic()" style="
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: white;
-      background: transparent;
-      border: none;
-      font-weight: bold;
-      font-size: 20px;
-      cursor: pointer;
-    ">❌</button>
-    <h3>Lagunya Orang Tulus</h3>
-    <ul id="musicList"></ul>
-  </div>
-  
-  <!-- Panel Partner (Direvisi: 4 gambar + nama) -->
-  <div id="partnerPanel" class="floating-panel hidden">
-    <button onclick="closePartner('partnerPanel')" style="
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: white;
-      background: transparent;
-      border: none;
-      font-weight: bold;
-      font-size: 20px;
-      cursor: pointer;
-    ">❌</button>
-    <h3 style="color: white;">PARTNER LAXSTORE</h3><br>
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-
-    <!-- Partner 1 -->
-    <div style="text-align: center;">
-      <img src="ptpertama.jpg" 
-         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('popupPartner1')" 
-         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
-      <div style="color: white;">Partner Open</div>
-    </div>
-
-    <!-- Partner 2 -->
-    <div style="text-align: center;">
-      <img src="pt2.jpg" 
-         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('popupPartner2')" 
-         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
-      <div style="color: white;">Partner Open</div>
-    </div>
-
-    <!-- Partner 3 -->
-    <div style="text-align: center;">
-      <img src="pt3.jpg" 
-         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('popupPartner3')" 
-         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
-      <div style="color: white;">Partner Open</div>
-    </div>
-
-    <!-- Partner 4 -->
-    <div style="text-align: center;">
-      <img src="pt4.jpg" 
-         style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 5px; cursor: pointer;" 
-         onclick="openPartnerPopup('popupPartner4')" 
-         onerror="this.style.pointerEvents='none'; this.style.opacity='0.4'; this.title='Gambar tidak tersedia';">
-      <div style="color: white;">Partner Open</div>
-    </div>
-</div>
-  
- <div class="join-partner-container">
-  <a href="https://wa.me/6285642962052?text=Halo%20MinLaxs%20Saya%20ingin%20join%20partner" target="_blank" class="join-btn">Join Partner</a>
-  </div>
-  </div>
-  
-  <!-- Popup Partner 1 -->
-<div id="popupPartner1" class="popup-menu hidden">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePartner('popupPartner1')">❌</span>
-    <h3 style="color:white; text-align:center;">INFO PARTNER</h3>
-    <div class="partner-buttons">
-  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
-  <button onclick="window.open('https://chat.whatsapp.com/Jy4WSrlZp0L7D6jQRCRPEX?mode=r_t', '_blank')">💬 Grup JB</button><br><br>
-  <button onclick="window.open('https://whatsapp.com/channel/0029VbB35ic6LwHi2HbT5Z3P', '_blank')">📢 Saluran Testi</button><br>
-</div>
-<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content" id="popupContent">
+    <button class="x-btn" onclick="closePopup()">×</button>
+    <h2>Judul</h2>
+    <p>Isi keterangan...</p>
   </div>
 </div>
 
-<!-- Popup Partner 2 -->
-<div id="popupPartner2" class="popup-menu hidden">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePartner('popupPartner2')">❌</span>
-    <h3 style="color:white; text-align:center;">PARTNER</h3>
-    <div class="partner-buttons">
-  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
-  <button onclick="window.open('https://chat.whatsapp.com/XXXX', '_blank')">💬 GC JB</button><br><br>
-  <button onclick="window.open('https://t.me/laxstorechannel', '_blank')">📢 Saluran Stock/Testimoni</button><br>
-</div>
-<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
-  </div>
-</div>
+<script>
+const popup=document.getElementById("popup");
+const popupContent=document.getElementById("popupContent");
 
-<!-- Popup Partner 3 -->
-<div id="popupPartner3" class="popup-menu hidden">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePartner('popupPartner3')">❌</span>
-    <h3 style="color:white; text-align:center;">PARTNER</h3>
-    <div class="partner-buttons">
-  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
-  <button onclick="window.open('https://chat.whatsapp.com/XXXX', '_blank')">💬 GC JB</button><br><br>
-  <button onclick="window.open('https://t.me/laxstorechannel', '_blank')">📢 Saluran Stock/Testimoni</button><br>
-</div>
-<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
-  </div>
-</div>
-
-<!-- Popup Partner 4 -->
-<div id="popupPartner4" class="popup-menu hidden">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePartner('popupPartner4')">❌</span>
-    <h3 style="color:white; text-align:center;">PARTNER</h3>
-    <div class="partner-buttons">
-  <button onclick="window.open('https://wa.me/6287896177126', '_blank')">👤 Admin</button><br><br>
-  <button onclick="window.open('https://chat.whatsapp.com/XXXX', '_blank')">💬 GC JB</button><br><br>
-  <button onclick="window.open('https://t.me/laxstorechannel', '_blank')">📢 Saluran Stock/Testimoni</button><br>
-</div>
-<h3 style="color:white; text-align:center;">Store JB Amanah Dan Terpercaya</h3>
-  </div>
-</div>
-  
- <!-- Panel Announcement (Direvisi: hanya teks) -->
- <div id="announcementPanel" class="floating-panel hidden"
-  style="
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-    background: #111;
-    color: #fff;
-    border: 2px solid #a855f7;
-    border-radius: 10px;
-    padding: 20px;
-    z-index: 9999;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
-  ">
-  <!-- Tombol tutup -->
-  <button onclick="document.getElementById('announcementPanel').classList.add('hidden')"
-    style="
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;">
-    ×
-  </button>
-
-  <h3 style="margin-top: 30px;">‼️ IKUTI SARAN MINLAXS ‼️</h3>
-  <ol style="color: #ccc; text-align: left; padding-left: 20px;">
-    <li>Hindari Trx Jika Di Chat Duluan Dengan Mengatasnamakan Store Besar/Femes</li>
-    <li>Hindari Trx No PP Wa (PP Kosong) Bisa Jadi Clone/Nokos yang Sering Ripper Gunakan </li>
-    <li>Hindari Trx Sistem Direct/SisP/Delay Jika Seller No Ident / Gd Jaminan Rawan Ripper</li>
-    <li>Hindari Trx Akun Murah Spek Gahar Rawan Ripper Perlu Cek Nomer Seller Terlebih Dahulu</li>
-    <li>Hindari Trx dengan Store Berkaitan Dengan nama Cewe Sudah Pasti Oknum Hode G Modal</li>
-    <li>Hindari Trx Log FB Ribet Salah Pw Perlu Di Bengkel Perlu Nombok Ujung&quot;x Kena Ripp/HB</li>
-    <li>Hindari Trx Mc/Rekber Diatur Seller (Bukan Setempat) Jangan Mau Diiming&quot; Bayar 2xLipat</li>
-    <li>Hindari Trx Bind Mati/Hilang Wajib AllReff + Wajib Cocokan Email Perangkat dan Bind FF</li>
-    <li>Hindari Trx Bind Sepaket Jika Hanya Dikasih Email + Code Verif Disuruh Copot/Ganti Bind karena Perlu 15 Hari Hati&quot; Tergocek Kang HB</li>
-  </ol>
-
-  <h3 style="color: white;">⁉️ Jika Masih Kurang Memahami Tentang Penjelasan Bahaya Transaksi Yang Ada Di JB Bisa Langsung Tanyakan MinLaxs 😎🤙</h3>
- </div>
-
-    <div id="announcementPopup" class="popup-box" style="display:none; position:fixed; z-index:9999; left:50%; top:50%; transform:translate(-50%, -50%); background:#1a1a1a; border: 1px solid #a855f7;">
-      <h2 id="announcementText" style="color:white; margin-bottom:10px;"></h2>
-      <button onclick="document.getElementById('announcementPopup').style.display='none'">Tutup</button>
-    </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 120, density: { enable: true, value_area: 800 } },
-        color: { value: "#a855f7" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: 3 },
-        line_linked: {
-          enable: true, distance: 120, color: "#9333ea",
-          opacity: 0.5, width: 1
-        },
-        move: { enable: true, speed: 1.3 }
-      },
-      interactivity: {
-        events: { onhover: { enable: true, mode: "grab" } },
-        modes: { grab: { distance: 140, line_linked: { opacity: 0.8 } } }
-      },
-      retina_detect: true
-    });
-
-    const logo = document.getElementById('logoSwitch');
-    const logos = ["logo1.png", "logo2.png"];
-    let i = 0;
-    setInterval(() => {
-      i = (i + 1) % logos.length;
-      logo.src = logos[i];
-    }, 6500);
-
-    const audio = document.getElementById("bg-music");
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const popup = document.getElementById("popup-welcome");
-      const closeBtn = document.querySelector("#popup-welcome button");
-
-      closeBtn.addEventListener("click", () => {
-        audio.play().catch(() => {});
-        closePopup();
-      });
-
-      popup.addEventListener("click", (e) => {
-        if (e.target === popup) {
-          audio.play().catch(() => {});
-          closePopup();
-        }
-      });
-      
-      // Otomatis menutup popup setelah 7 detik
-      setTimeout(() => {
-        if (popup.style.display !== "none") {
-        audio.play().catch(() => {});
-        closePopup();
-       }
-      }, 7000);
-
-      function closePopup() {
-        popup.classList.add("fade-out");
-        setTimeout(() => popup.style.display = "none", 400);
-      }
-
-      const musicList = document.getElementById("musicList");
-      const songs = [
-        "music1.mp3", "music2.mp3", "music3.mp3"
-      ];
-      const titles = [
-        "NDX: Nemen", "NDX: Tresno Tekan Mati", "NDX: Nyekso Batin"
-      ];
-
-      songs.forEach((song, idx) => {
-        const li = document.createElement("li");
-        li.textContent = titles[idx];
-        li.onclick = () => {
-          audio.src = song;
-          audio.play();
-        };
-        musicList.appendChild(li);
-      });
-    });
-
-    function togglePanel(type) {
-      const report = document.getElementById("reportForm");
-      const music = document.getElementById("musicMenu");
-      const partner = document.getElementById("partnerPanel");
-      const announcement = document.getElementById("announcementPanel");
-
-      report?.classList.add("hidden");
-      music?.classList.add("hidden");
-      partner?.classList.add("hidden");
-      announcement?.classList.add("hidden");
-
-      if (type === "report") report?.classList.toggle("hidden");
-      if (type === "music") music?.classList.toggle("hidden");
-      if (type === "partner") partner?.classList.toggle("hidden");
-      if (type === "announcement") announcement?.classList.toggle("hidden");
-    }
-
-    function closePanels() {
-      document.getElementById("reportForm").classList.add("hidden");
-      document.getElementById("musicMenu").classList.add("hidden");
-    }
-    
-    document.addEventListener("visibilitychange", function () {
-     if (document.hidden) {
-      audio.pause();
-     } else {
-      audio.play().catch(() => {});
-     }
-    });
-
-    window.addEventListener("beforeunload", function () {
-     audio.pause();
-    });
-    
-    function showAnnouncement(text) {
-      const popup = document.getElementById("announcementPopup");
-      const message = document.getElementById("announcementText");
-      message.textContent = text;
-      popup.style.display = "block";
-    }
-    
-    // Fungsi buka popup
-  function openPartnerPopup(partnerName) {
-    // Jika ingin popup beda per partner, bisa gunakan `partnerName` untuk isi dinamis
-    document.getElementById("popupPartnerMenu").classList.remove("hidden");
+function openPopup(type){
+  if(type==="trx"){
+    popupContent.querySelector("h2").innerText="TRX DI LAXSTORE";
+    popupContent.querySelector("p").innerText=
+      "Begini Caranya Gan:\n\n"+
+      "1. Hubungi Admin Via WA / DM Ig\n"+
+      "2. Niat Jual / Beli Akun (PHP Blokir) / Ingin Menggunakan Jasa Rekber / MC (Culik Aja)\n"+
+      "3. Buat Kesepakatan Trx dan Deal Harga\n"+
+      "4. Jika Direct Lanjut Ke Pembayaran Akun\n"+
+      "5. Setelah Dana Masuk Lanjut Send Data Akun\n"+
+      "6. Trx Selesai Transparant\n";
+  }else if(type==="bahaya"){
+    popupContent.querySelector("h2").innerText="Bahaya Trx JB";
+    popupContent.querySelector("p").innerHTML=`
+      <h3 style="margin-top: 20px;">‼️ IKUTI SARAN MINLAXS</h3>
+      <ol style="color: #ccc; text-align: left; padding-left: 20px;">
+        <li>Hindari Trx Jika Di Chat Duluan Dengan Mengatasnamakan Store Besar/Femes</li>
+        <li>Hindari Trx No PP Wa (PP Kosong) Bisa Jadi Clone/Nokos yang Sering Ripper Gunakan</li>
+        <li>Hindari Trx Sistem Direct/SisP/Delay Jika Seller No Ident / Gd Jaminan Rawan Ripper</li>
+        <li>Hindari Trx Akun Murah Spek Gahar Rawan Ripper Perlu Cek Nomer Seller Terlebih Dahulu</li>
+        <li>Hindari Trx dengan Store Berkaitan Dengan nama Cewe Sudah Pasti Oknum Hode G Modal</li>
+        <li>Hindari Trx Log FB Ribet Salah Pw Perlu Di Bengkel Perlu Nombok Ujung"x Kena Ripp/HB</li>
+        <li>Hindari Trx Mc/Rekber Diatur Seller (Bukan Setempat) Jangan Mau Diiming" Bayar 2xLipat</li>
+        <li>Hindari Trx Bind Mati/Hilang Wajib AllReff + Wajib Cocokan Email Perangkat dan Bind FF</li>
+        <li>Hindari Trx Bind Sepaket Jika Hanya Dikasih Email + Code Verif Disuruh Copot/Ganti Bind karena Perlu 15 Hari Hati" Tergocek Kang HB</li>
+      </ol>
+      <h3 style="color: white;">⁉️ Jika Masih Kurang Memahami Tentang Penjelasan Bahaya Transaksi Yang Ada Di JB Bisa Langsung Tanyakan MinLaxs</h3>
+    `;
+  }else if(type==="welcome"){
+    popupContent.querySelector("h2").innerText="Oy!";
+    popupContent.querySelector("p").innerText=
+      "Hi, Selamat Datang di LAXSTORE JB\n"+
+      "JB Akun Bergaransi, Amanah, dan Terpercaya.";
   }
-  function closePartnerPopup() {
-   document.getElementById("popupPartnerMenu").classList.add("hidden");
-  }
-  function closeMusic() {
-    document.getElementById("musicMenu").classList.add("hidden");
-  }
+  popup.classList.add("show");
+}
+function closePopup(){
+  popup.classList.remove("show");
+}
+popup.addEventListener("click",e=>{
+  if(e.target===popup) closePopup();
+});
+window.addEventListener("load",()=>{
+  setTimeout(()=>{openPopup("welcome")},800);
+});
 
-  function closePartner() {
-    document.getElementById("partnerPanel").classList.add("hidden");
+/* === LOGO SLIDE === */
+const logo1=document.getElementById("logo1");
+const logo2=document.getElementById("logo2");
+let showFirst=true;
+setInterval(()=>{
+  if(showFirst){
+    logo1.classList.add("hidden");
+    logo2.classList.remove("hidden");
+  }else{
+    logo1.classList.remove("hidden");
+    logo2.classList.add("hidden");
   }
-  
-  function openPartnerPopup(popupId) {
-    // Sembunyikan semua popup terlebih dahulu
-    const popups = document.querySelectorAll('.popup-menu');
-    popups.forEach(p => p.classList.add('hidden'));
-
-    // Tampilkan popup yang dimaksud
-    const popup = document.getElementById(popupId);
-    if (popup) {
-      popup.classList.remove('hidden');
-    }
-  }
-
-  function closePartner(popupId) {
-    if (popupId) {
-      document.getElementById(popupId).classList.add('hidden');
-    } else {
-      // Jika tidak ada ID, tutup semua
-      const popups = document.querySelectorAll('.popup-menu');
-      popups.forEach(p => p.classList.add('hidden'));
-    }
-  }
-  
-  function openPartner(id) {
-    document.getElementById(id).classList.remove('hidden');
-  }
-
-  function closePartner(id) {
-    document.getElementById(id).classList.add('hidden');
-  }
-  
-  // Blokir klik kanan
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-
-  // Blokir shortcut umum: F12, Ctrl+Shift+I, Ctrl+U, dll
-  document.addEventListener('keydown', function(e) {
-    if (
-      e.key === 'F12' ||
-      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
-      (e.ctrlKey && e.key === 'U')
-    ) {
-      e.preventDefault();
-    }
-  });
-
-  // Deteksi devtools terbuka (sederhana)
-  setInterval(function() {
-    const before = new Date().getTime();
-    debugger;
-    const after = new Date().getTime();
-    if (after - before > 100) {
-      document.body.innerHTML = '<h1 style="color:red;text-align:center;">Access Blocked</h1>';
-    }
-  }, 1000);
-  </script>
+  showFirst=!showFirst;
+},7000);
+</script>
 </body>
-    </html>
+</html>
